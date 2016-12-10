@@ -90,7 +90,7 @@ define(function(require, exports, module) {
 			template = Storage.get('template');
 		}else{
 			$.ajax({
-				url: seajs.root + '/WDP/temp/temp.htm',
+				url: seajs.root + '/ui/temp/temp.htm',
 				dataType:'html',
 				cache:false,
 				async:false,
