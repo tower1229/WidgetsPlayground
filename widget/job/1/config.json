@@ -1,0 +1,20 @@
+{
+	"cssConfig": {
+		"yqBDColor":{
+			"name": "圆圈线颜色",
+			"value": "#3bb4f2",
+			"type": "text"
+		},
+		"sjBDColor":{
+			"name": "事件线颜色",
+			"value": "#cccccc",
+			"type": "text"
+		}
+	},
+	"jsConfig": {
+		
+	},
+	"showConfig": {
+		"viewWidth": 12
+	}
+}

@@ -1,0 +1,280 @@
+<!-- //v1.1.1 演示区域动态尺寸 -->
+
+<!-- //导航 -->
+<!-- target: nav -->
+<ul class="main-nav">
+	<!-- for: ${widgets} as ${main} , ${index} -->
+	<li class="main-nav-${index}"><i class="ion">${main.icon | raw}</i>
+		<span>${main.title}</span> (${main.nums})
+	</li>
+	<!-- /for -->
+</ul>
+<div class="sub-nav">
+	<!-- for: ${widgets} as ${sub} , ${index} -->
+	<!-- if: ${sub.list}-->
+	<ul class="sub-nav-${index}">
+		<!-- for: ${sub.list} as ${subnav} , ${index2} -->
+		<li class="sub-nav-${index}-${index2}">${subnav.title} (${subnav.list.length})</li>
+		<!-- /for -->
+	</ul>
+	<!-- /if -->
+	<!-- /for -->
+</div>
+
+<!-- //筛选 -->
+<!-- target: filter -->
+<form>
+	<fieldset>
+		<legend>${posi}</legend>
+		<div class="form-group tagWrap" id="tagWrap">
+			<label>标签：</label>
+			<button type="button" class="btn btn-primary btn-sm chooseAll btn-info">全部</button>
+			<!-- for: ${tags} as ${tag} -->
+			<button type="button" class="btn btn-primary btn-sm">${tag}</button>
+			<!-- /for -->
+		</div>
+		<div class="form-group" id="sortWrap">
+			<label>排序：</label>
+			<button type="button" class="btn btn-default" data-val="bytitle">名称排序</button>
+			<button type="button" class="btn btn-default" data-val="bydate">时间排序</button>
+		</div>
+	</fieldset>
+</form>
+
+<!-- //组件列表 -->
+<!-- target: widgetList -->
+<ul class="row">
+	<!-- if: ${widgets.length}==0 -->
+	<li class="span-12">
+		<p class="widget_empty_tip">组件去哪儿了？</p>
+	</li>
+	<!-- else -->
+	<!-- for: ${widgets} as ${widget} , ${index} -->
+	<li class="span-3 midd-4 smal-12" data-tag="${widget.tag}" data-name="${widget.widget}">
+		<div class="_layer">
+			<div class="_album rect-618"><img src="${widget.album}" class="_full" onerror="javascript:this.src=seajs.root + '/resources/web/images/nopic.jpg'"></div>
+			<h4 class="_t el">${widget.title}</h4>
+			<p>作者：${widget.author}</p>
+			<p>日期：${widget.date}</p>
+			<div class="_name"><span>${widget.widget}</span></div>
+		</div>
+	</li>
+	<!-- /for -->
+	<!-- /if -->
+</ul>
+
+<!-- //检索组件列表 -->
+<!-- target: selectWidget -->
+<ul class="row">
+	<!-- if: ${widgets.length}==0 -->
+	<li class="span-12">
+		<p class="widget_empty_tip">组件去哪儿了？</p>
+	</li>
+	<!-- else -->
+	<!-- for: ${widgets} as ${widget} , ${index} -->
+	<li class="span-3 midd-4 smal-12" data-tag="${widget.tag}" data-name="${widget.widget}">
+		<div class="_layer">
+			<div class="_album rect-618"><img src="${widget.album}" class="_full" onerror="javascript:this.src=seajs.root + '/resources/web/images/nopic.jpg'"></div>
+			<h4 class="_t el">${widget.title}</h4>
+			<p>作者：${widget.author}</p>
+			<p>日期：${widget.date}</p>
+			<div class="_name"><span>${widget.widget}</span></div>
+		</div>
+	</li>
+	<!-- /for -->
+	<!-- /if -->
+</ul>
+
+<!-- //演示界面 -->
+<!-- target: playTime -->
+<div class="playTime" id="playTime" style="width:100%;height:100%">
+	<!-- //头部 -->
+	<div class="playTime_head">
+		<div class="playTime_title">${Widget.title}<small>（${Widget.widget}）</small></div>
+		<div class="playTime_close text-danger"><i class="ion">&#xe6b0;</i></div>
+	</div>
+	<!-- //演示区 -->
+	<div class="wrap play_area">
+		<div class="row">
+			<div class="span-${viewWidth}" id="playView"> </div>
+		</div>
+	</div>
+	<!-- //配置区 -->
+	<div class="playTime_panel" id="configPanel"></div>
+	
+</div>
+
+<!-- //配置界面 -->
+<!-- target: panel -->
+<div class="_configpanel playTime_mark">
+	<div class="_tag bg-primary">配置面板</div>
+	<div class="_clo"><i class="ion">&#xe6ad;</i></div>
+	<form class="panelWrap">
+		<div class="section" data-item="cssConfig">
+			<!-- for: ${config.cssConfig} as ${item}, ${index} -->
+			<!-- if: ${index}!="id" -->
+			<div class="form-group row">
+				<div class="span-6"><label class="control-label" for="${index}">${item.name}：</label></div>
+				<div class="span-6">
+					<!-- if: ${item.type}=="select" -->
+					<select data-key="${index}" class="form-control">
+						<!-- for: ${item.option} as ${option} -->
+						<option value="${option}" <!-- if: ${option}==${item.value} -->selected<!-- /if -->>${option}</option>
+						<!-- /for -->
+					</select>
+					<!-- else -->
+					<input data-key="${index}" type="${item.type}" class="form-control" value="${item.value}" id="${index}">
+					<!-- /if -->
+				</div>
+			</div>
+			<!-- /if -->
+			<!-- /for -->
+		</div>
+		<div class="section" data-item="jsConfig">
+			<!-- for: ${config.jsConfig} as ${item}, ${index} -->
+			<!-- if: ${index}!="id" -->
+			<div class="form-group row">
+				<div class="span-6"><label class="control-label" for="${index}">${item.name}：</label></div>
+				<div class="span-6">
+					<!-- if: ${item.type}=="select" -->
+					<select data-key="${index}" class="form-control">
+						<!-- for: ${item.option} as ${option} -->
+						<option value="${option}" <!-- if: ${option}==${item.value} -->selected<!-- /if -->>${option}</option>
+						<!-- /for -->
+					</select>
+					<!-- else -->
+					<input data-key="${index}" type="${item.type}" class="form-control" value="${item.value}" id="${index}">
+					<!-- /if -->
+				</div>
+			</div>
+			<!-- /if -->
+			<!-- /for -->
+		</div>
+		<div class="section" data-item="showConfig">
+			<!-- for: ${config.showConfig} as ${item}, ${index} -->
+			<!-- if: ${index}!="id" && ${index}!="viewWidth" -->
+			<div class="form-group row">
+				<div class="span-6"><label class="control-label" for="${index}">${item.name}：</label></div>
+				<div class="span-6">
+					<!-- if: ${item.type}=="select" -->
+					<select data-key="${index}" class="form-control">
+						<!-- for: ${item.option} as ${option} -->
+						<option value="${option}" <!-- if: ${option}==${item.value} -->selected<!-- /if -->>${option}</option>
+						<!-- /for -->
+					</select>
+					<!-- else -->
+					<input data-key="${index}" type="${item.type}" class="form-control" value="${item.value}" id="${index}">
+					<!-- /if -->
+				</div>
+			</div>
+			<!-- /if -->
+			<!-- /for -->
+		</div>
+		<div class="form-group">
+			<button type="reset" class="btn btn-block btn-danger">恢复默认配置</button>
+		</div>
+	</form>
+</div>
+<div class="_getmerge playTime_mark">
+	<div class="_tag bg-primary">组件合并</div>
+	<div class="_clo"><i class="ion">&#xe6ad;</i></div>
+	<div class="panelWrap">
+		<form class="mergeQueue" id="mergeQueue">
+			<div class="_add _before"></div>
+			<ul class="_queue" id="mergeQueueWrap">
+			
+			</ul>
+			<div class="_add _after"></div>
+			<button type="submit" class="btn btn-lg btn-danger btn-block">应用</button>
+		</form>
+	</div>
+</div>
+<div class="_getconfig playTime_mark">
+	<div class="_tag bg-primary">生成配置</div>
+	<div class="_clo"><i class="ion">&#xe6ad;</i></div>
+	<div class="panelWrap">
+		<form id="getConfig">
+			<div class="form-group">
+				<button type="submit" id="copyConfigCode" class="btn btn-block btn-primary btn-lg">复制配置代码</button>
+			</div>
+			<div class="form-group">
+				<textarea class="form-control configCodeBox" id="configCodeBox"></textarea>
+			</div>
+		</form>
+	</div>
+</div>
+<div class="_getcode playTime_mark">
+	<div class="_tag bg-primary">获取代码</div>
+	<div class="_clo"><i class="ion">&#xe6ad;</i></div>
+	<div class="panelWrap">
+		<form>
+			<div class="form-group">
+				<a href="###" class="btn btn-block btn-default btn-lg" id="copyHTML">复制HTML到剪贴板</a>
+			</div>
+			<div class="form-group">
+				<a href="###" class="btn btn-block btn-info btn-lg" id="copyCSS">复制CSS到剪贴板</a>
+			</div>
+			<div class="form-group">
+				<a href="###" class="btn btn-block btn-primary btn-lg" id="copyJS">复制JS到剪贴板</a>
+			</div>
+			<div class="form-group">
+				<p class="form-control-static text-success tc" id="copyResult"></p>
+			</div>
+		</form>
+	</div>
+</div>
+
+<!-- target: mergeQueue -->
+<!-- for: ${queue} as ${wid} -->
+	<li>
+		<div class="_del text-danger" data-widget="${wid.widget}"><i class="ion">&#xe638;</i></div>
+		<h5>${wid.widget}</h5>
+		<p>${wid.title}</p>
+	</li>
+<!-- /for -->
+
+<!-- target: userSet -->
+<form id="userSetForm" class="userSetForm">
+	<div class="form-group">
+		<label class="control-label" for="userSetName">怎么称呼：</label>
+		<input type="text" class="form-control" id="userSetName" placeholder="${name}">
+	</div>
+	<button type="submit" class="btn btn-default">OK</button>
+</form>
+
+<!-- target: count -->
+<div class="userCount">
+	<table class="table">
+		<tbody>
+			<!-- for: ${track} as ${day}, ${date} -->
+			<tr class="active">
+				<th>${date}</th>
+			</tr>
+			<tr>
+				<td>
+					<table class="table table-bordered">
+						<!-- for: ${day} as ${dayWidget} -->
+						<tr>
+							<td>${dayWidget.widgetID} (${dayWidget.widgetName})</td>
+							<td>
+								<table class="table table-condensed table-hover">
+								<!-- if: ${dayWidget.set.length} -->
+									<!-- for: ${dayWidget.set} as ${set} -->
+									<tr>
+										<td>${set}</td>
+									</tr>
+									<!-- /for -->
+								<!-- else -->
+									<tr><td>未修改任何配置</td></tr>
+								<!-- /if -->
+								</table>
+							</td>
+						</tr>
+						<!-- /for -->
+					</table>
+				</td>
+			</tr>
+			<!-- /for -->
+		</tbody>
+	</table>
+</div>

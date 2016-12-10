@@ -1,0 +1,4 @@
+.widget-bread-1 {font-size: ${fontSize.value}; color: ${textColor.value}; }
+.widget-bread-1 a { color: ${textColor.value};}
+.widget-bread-1 a:hover{color:${hoverColor.value};}
+.widget-bread-1 .ion { font-size: ${iconSize.value}; margin: 0 ${iconMargin.value};}

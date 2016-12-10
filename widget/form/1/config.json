@@ -1,0 +1,63 @@
+{
+	"cssConfig": {
+		"borderRadius": {
+			"name": "圆角大小",
+			"value": "0px",
+			"type": "text"
+		},
+		"borderColor": {
+			"name": "线条颜色",
+			"value": "#cccccc",
+			"type": "color"
+		},
+		"okColor": {
+			"name": "确认按钮颜色",
+			"value": "#286090",
+			"type": "color"
+		},
+		"okBorderColor": {
+			"name": "确认按钮边框色",
+			"value": "#204d74",
+			"type": "color"
+		},
+		"resetColor": {
+			"name": "重置按钮颜色",
+			"value": "#e6e6e6",
+			"type": "color"
+		},
+		"resetBorderColor": {
+			"name": "重置按钮边框色",
+			"value": "#adadad",
+			"type": "color"
+		}
+	},
+	"jsConfig": {},
+	"showConfig": {
+		"viewWidth": 10,
+		"labelTitle": {
+			"name": "标题文字",
+			"value": "表单项目",
+			"type": "text"
+		},
+		"leftWidth": {
+			"name": "左栏宽度",
+			"value": 6,
+			"type": "number"
+		},
+		"rightWidth": {
+			"name": "右栏宽度",
+			"value": 6,
+			"type": "number"
+		},
+		"labelWidth": {
+			"name": "标题宽度",
+			"value": 3,
+			"type": "number"
+		},
+		"controlWidth": {
+			"name": "控件宽度",
+			"value": 9,
+			"type": "number"
+		}
+	}
+}

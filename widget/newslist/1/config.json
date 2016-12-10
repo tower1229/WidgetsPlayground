@@ -1,0 +1,35 @@
+{
+	"cssConfig": {
+		"partWidth": {
+			"name": "左右版块宽度(%)",
+			"value": "49%",
+			"type": "text"
+		},
+		"titleBG": {
+			"name": "标题背景色",
+			"value": "#a37740",
+			"type": "text"
+		},
+		"defaultDotColor": {
+			"name": "默认圆点颜色",
+			"value": "#ffffff",
+			"type": "text"
+		},
+		"curDotColor": {
+			"name": "当前圆点颜色",
+			"value": "#ffe400",
+			"type": "text"
+		},
+		"hoverColor": {
+			"name": "鼠标悬停文字色",
+			"value": "#a37740",
+			"type": "text"
+		}
+	},
+	"jsConfig": {
+		
+	},
+	"showConfig": {
+		"viewWidth": 12
+	}
+}

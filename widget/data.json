@@ -1,0 +1,151 @@
+{
+	"version": {
+		"value": "1.1.0",
+		"description": "增加组件合并功能；补充部分组件。"
+	},
+	"widgets": [{
+		"title": "首页",
+		"icon": "&#xe64a;"
+	}, {
+		"title": "通用组件",
+		"icon": "&#xe6bb;",
+		"list": [{
+			"title": "导航类",
+			"list": [{
+				"widget": "bread-1",
+				"title": "图标面包屑",
+				"tag": "面包屑/图标",
+				"author": "UI",
+				"date": "2015-06-04"
+			}, {
+				"widget": "page-1",
+				"title": "分页",
+				"tag": "分页",
+				"author": "UI",
+				"date": "2015-06-23"
+			}, {
+				"widget": "nav-1",
+				"title": "导航",
+				"tag": "导航/下拉",
+				"author": "王健",
+				"date": "2015-09-19"
+			}]
+		}, {
+			"title": "表格",
+			"list": [{
+				"widget": "table-1",
+				"title": "基本表格",
+				"tag": "表格",
+				"author": "UI",
+				"date": "2015-09-21"
+			}]
+		}, {
+			"title": "表单",
+			"list": [{
+				"widget": "form-1",
+				"title": "双栏表单",
+				"tag": "双栏表单/订购",
+				"author": "UI",
+				"date": "2015-06-21"
+			}]
+		}]
+	}, {
+		"title": "栏目组件",
+		"icon": "&#xe64d;",
+		"list": [{
+			"title": "产品列表",
+			"list": [{
+				"widget": "prolist-1",
+				"title": "类别列表",
+				"tag": "产品型号下拉",
+				"author": "jerei.com",
+				"date": "2015-06-24"
+			}, {
+				"widget": "prolist-2",
+				"title": "选项卡产品",
+				"tag": "选项卡",
+				"author": "jerei.com",
+				"date": "2015-06-24"
+			}]
+		}, {
+			"title": "产品详细",
+			"list": [{
+				"widget": "prodetail-1",
+				"title": "经典缩略图",
+				"tag": "缩略图/放大镜",
+				"author": "jerei.com",
+				"date": "2015-06-16"
+			}]
+		}, {
+			"title": "新闻列表",
+			"list": [{
+				"widget": "newslist-1",
+				"title": "头条新闻",
+				"tag": "新闻/头条",
+				"author": "王健",
+				"date": "2016-04-06"
+			}]
+		}, {
+			"title": "新闻详细",
+			"list": [{
+				"widget": "newsdetail-1",
+				"title": "奇瑞新闻详细",
+				"tag": "",
+				"author": "jerei.com",
+				"date": "2015-06-25"
+			}]
+		}, {
+			"title": "通用栏目",
+			"list": [{
+				"widget": "download-1",
+				"title": "下载列表",
+				"tag": "下载/列表",
+				"author": "jerei.com",
+				"date": "2015-05-14"
+			},{
+				"widget": "search-1",
+				"title": "搜索结果",
+				"tag": "搜索/列表",
+				"author": "jerei.com",
+				"date": "2015-06-24"
+			}]
+		}, {
+			"title": "发展历程",
+			"list": [{
+					"widget": "history-1",
+					"title": "发展历程1",
+					"tag": "大事记/历史",
+					"author": "jerei.com",
+					"date": "2015-09-14"
+				}
+
+			]
+		}, {
+			"title": "人才招聘",
+			"list": [{
+				"widget": "job-1",
+				"title": "人才招聘1",
+				"tag": "人才招聘/job",
+				"author": "jerei.com",
+				"date": "2015-09-21"
+			}]
+		}, {
+			"title": "问答类",
+			"list": [{
+					"widget": "qa-1",
+					"title": "问答列表",
+					"tag": "问答",
+					"author": "UI",
+					"date": "2015-06-17"
+				}
+			]
+		}]
+	}, {
+		"title": "Js组件",
+		"icon": "&#xe6b7;",
+		"list": []
+	}, {
+		"title": "工具",
+		"icon": "&#xe663;"
+	}]
+}

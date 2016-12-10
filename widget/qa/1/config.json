@@ -1,0 +1,44 @@
+{
+	"cssConfig": {
+		"fontSizeTitle": {
+			"name": "标题字号",
+			"value": "14px",
+			"type": "text"
+		},
+		"fontSizeText": {
+			"name": "内容字号",
+			"value": "14px",
+			"type": "text"
+		},
+		"numColor": {
+			"name": "序号颜色",
+			"value": "#0e90d2",
+			"type": "color"
+		}
+		,
+		"numFontSize": {
+			"name": "序号字号",
+			"value": "18px",
+			"type": "text"
+		}
+		,
+		"titlePadding": {
+			"name": "标题内容间距",
+			"value": "0px",
+			"type": "text"
+		}
+		,
+		"listPadding": {
+			"name": "列表间距",
+			"value": "20px",
+			"type": "text"
+		}
+	},
+	"jsConfig": {
+
+	},
+	"showConfig": {
+		"viewWidth": 12
+
+	}
+}

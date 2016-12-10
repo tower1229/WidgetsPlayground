@@ -1,0 +1,83 @@
+{
+	"cssConfig": {
+		"tabHeaderBG":{
+			"name": "头部背景色",
+			"value":"#ededed",
+			"type": "text"
+		},
+		"tabtBTC":{
+			"name": "选项卡选中颜色",
+			"value":"#0e90d2",
+			"type": "text"
+		},
+		"tabtBRC":{
+			"name": "选项卡右线颜色",
+			"value":"#cccccc",
+			"type": "text"
+		},
+		"imgMb":{
+			"name": "图片下边距(px)",
+			"value":5,
+			"type": "number"
+		},
+		"proTitleSize":{
+			"name": "标题字号(px)",
+			"value":14,
+			"type": "number"
+		},
+		"titleMb":{
+			"name": "标题下边距(px)",
+			"value":5,
+			"type": "number"
+		},
+		"titleBBC":{
+			"name": "标题下边线颜色",
+			"value":"#cccccc",
+			"type": "text"
+		},
+		"titleBBS":{
+			"name":"标题下边线形状",
+			"value": "dotted",
+			"type": "select",
+			"option": ["solid","dashed","dotted"]
+		},
+		"orderIcoC":{
+			"name": "下载图标颜色",
+			"value":"#0e90d2",
+			"type": "text"
+		}
+	},
+	"jsConfig": {
+		"tabAct":{
+			"name":"选项卡触发动作",
+			"value": "mouseenter",
+			"type": "select",
+			"option": ["mouseenter","click"]
+		}
+	},
+	"showConfig": {
+		"viewWidth": 12,
+		"imgProp": {
+			"name": "图片宽高比(%)",
+			"value": 75,
+			"type": "select",
+			"option": [75,618,5625,100]
+		},
+		"proImg":{
+			"name": "图片尺寸",
+			"value": "400x300",
+			"type": "text"
+		},
+		"proWidth":{
+			"name": "产品宽度(栅格)",
+			"value": 3,
+			"type": "number"
+		},
+		"imgProp": {
+			"name": "图片宽高比(%)",
+			"value": 75,
+			"type": "select",
+			"option": [75,618,5625,100]
+		}
+	}
+}

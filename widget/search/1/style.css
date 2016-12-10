@@ -1,0 +1,14 @@
+.Search-S1-head { overflow: hidden; padding: ${channelTitlePadd.value}; background: ${channelBackground.value}; margin-bottom: 20px;  *zoom: 1;}
+.Search-S1-head ._form { margin-right: 3em; }
+.Search-S1-head ._inp { height: ${inputHeight.value}; line-height: ${inputHeight.value}; padding: 0 5px; background: #ffffff; border: 1px solid #cccccc; }
+.Search-S1-head ._btn { height: ${inputHeight.value}; line-height: ${inputHeight.value}; background:${searchBtnColor.value}; cursor: pointer; padding: 0; margin: 0;  border: 1px solid ${searchBtnColor.value}; width:${inputHeight.value} ;}
+.Search-S1-head ._btn .ion { vertical-align:top; margin: 0; padding: 0; color: #ffffff; font-size: ${iconSize.value}; }
+.Search-S1-head ._result { font-size: ${channelTitleSize.value}; line-height:${inputHeight.value};}
+.Search-S1-head ._result em { margin: 0 .4em; font-weight: 700; }
+.Search-S1-list { margin-bottom: 30px; }
+.Search-S1-list li { margin-bottom: ${listMargin.value}; }
+.Search-S1-list ._head { font-size: ${listFontSize.value};  padding: ${listPadd.value} 0; margin-bottom: 10px; border-bottom: 1px solid #cccccc; }
+.Search-S1-list ._num { float: left; }
+.Search-S1-list ._type { float: left; color:${searchBtnColor.value};padding: 0 1em; border-right: 1px solid #cccccc; margin-right: 1em; font-style: normal; }
+.Search-S1-list ._t { float: left; width: 50%; font-weight: bold; color:${listColor.value}; }
+.Search-S1-list ._p { padding-left: 60px; font-size: ${listConFontSize.value}; }

@@ -1,0 +1,30 @@
+.widget-prodetail-1 { overflow: hidden; *zoom: 1;}
+.widget-prodetail-1-img { float: left; width: ${leftWidth.value}%;}
+.widget-prodetail-1-img ._album_list { margin-top: ${albumMT.value}px;}
+.widget-prodetail-1-img ._album_list li { cursor: pointer; }
+.widget-prodetail-1-img ._album_list .album_img{border:${albumBW.value}px solid ${albumBC.value};}
+.widget-prodetail-1-img ._album_list .active .album_img{border-color:${albumActiveBC.value};}
+.widget-prodetail-1-detail { float: right; width: ${rightWidth.value}%;}
+.widget-prodetail-1-detail ._head { font-size: 12px; color: #999;}
+.widget-prodetail-1-detail ._title { font-size: ${titleSize.value}px; font-weight: ${titleWeight.value}; 
+line-height: ${titleHeight.value}px; overflow: hidden;height: ${titleHeight.value}px; color: ${titleColor.value}; }
+.widget-prodetail-1-detail ._tip { font-size: 12px; line-height: 26px; overflow: hidden; height: 26px; 
+  color: #999; border-bottom: 1px solid #ccc;}
+.widget-prodetail-1-detail ._tools { margin: ${btnMT.value}px 0 0;}
+.widget-prodetail-1-detail ._tools li {line-height: ${btnHeight.value}px;  width: ${btnWidth.value}px; height: ${btnHeight.value}px; 
+margin-right: ${btnMR.value}px; vertical-align: top;border: 1px solid ${btnBC.value}; }
+.widget-prodetail-1-detail ._tools ._link a { display: block; text-align: center;color: ${btnColor.value}; 
+  background: ${btnBG.value}; }
+.widget-prodetail-1-detail ._tools ._link a:hover { background: ${btnHoverBG.value};}
+.widget-prodetail-1-detail ._tools ._val { text-align: center;}
+.widget-prodetail-1-detail ._tools ._pop ._val .ion {font-size: 14px; color: #ccc;}
+
+.widget-prodetail-1-detail ._recome{margin: ${recomeMT.value}px 0 0;}
+.widget-prodetail-1-detail ._recome ._t { font-size: 18px; line-height: 34px;}
+.widget-prodetail-1-detail ._recome img { border: 1px solid #ccc;}
+.widget-prodetail-1-detail ._recome ._p { text-align: center;}
+.widget-prodetail-1-detail ._recome a:hover ._p { color: #2f2f2f;}
+@media only screen and (max-width: 480px) { 
+  .widget-prodetail-1-img, .widget-prodetail-1-detail { float: none; width: auto;}
+  .widget-prodetail-1-detail ._tools, .widget-prodetail-1-detail ._recome{ margin: 1em 0 0;}
+  }

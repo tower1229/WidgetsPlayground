@@ -1,0 +1,15 @@
+.widget-history-1 { background: #ffffff; }
+.widget-history-1 ._year { position: relative; height: 40px; margin-top: 12px; border-bottom: 1px dotted ${yqBDColor.value}; }
+.widget-history-1 ._year strong { position: absolute; width: 86px; height: 86px; background: url(/widget/history/1/year.png) no-repeat; left: 0; top: 0; text-align: center; line-height: 86px; color: #ffffff; font-size: 24px; }
+.widget-history-1 ._list ul { padding-left: 88px; }
+.widget-history-1 ._list li { position: relative; padding: 20px 20px 20px 8em; border-bottom: 1px dotted ${sjBDColor.value}; }
+.widget-history-1 ._list li strong { position: absolute; left: 1.5em; top: 1.5em; }
+
+@media only screen and (max-width: 40rem) {
+.History-H1 ._year { margin-bottom: 50px; }
+.History-H1 ._list ul { padding-left: 0; }
+.History-H1 ._list li { padding: 2.5em 0 0; }
+.History-H1 ._list li strong { left: 0; top: .5em; }
+}
+
+

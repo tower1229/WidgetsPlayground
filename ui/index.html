@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<title>Widgets</title>
+<meta content="Widgets" name="Keywords">
+<meta content="Widgets" name="Description">
+<link rel="icon" href="favicon.ico" >
+<meta name="format-detection" content="telephone=no">
+<link href="./css/ui.css" rel="stylesheet" />
+<link href="./css/platform.css" rel="stylesheet" />
+<!--[if lt IE 9]><script src="./lib/H5shiv.js"></script><![endif]-->
+</head>
+<body>
+<div class="head" id="head">
+	<h1 class="head_T">组件库2.0</h1>
+	<div class="head_right">
+		<a href="https://github.com/tower1229/WidgetsPlayground/issues" target="_blank" class="btn btn-success" id="issue"><i class="ion">&#xe637;</i>反馈</a>
+	</div>
+	<!-- 搜索 -->
+	<div class="search">
+		<input id="globalSearch" class="form-control input-lg" type="text" placeholder="搜索：组件名称、编号、标签...">
+	</div>
+</div>
+<div class="menu-bar" id="nav"></div>
+<!-- 首屏 -->
+<div class="welcome">
+	<div class="_cont wrap">
+		<div class="_T">欢迎使用组件库<em class="text-primary">2.0</em></div>
+		<div class="_p">&emsp;&emsp;集存储、检索、调试、应用于一体的组件库2.0，旨在提高组件定制性和复用性，提高基于组件的前端开发效率。</div>
+		<!-- 贴代码 -->
+		<div class="quickStart">
+			<form id="quickStart">
+				<div class="form-group">
+					<textarea class="form-control" id="configCode" placeholder="输入组件配置代码" spellcheck="false"></textarea>
+				</div>
+				<div class="form-group tc">
+					<button type="submit" class="btn btn-block btn-lg btn-primary">召唤组件</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<div class="wrap mainCont">
+	<!-- 筛选 -->
+	<div class="filter" id="filter"></div>
+	<!-- 列表 -->
+	<div class="widget-list" id="widgetList"></div>
+
+</div>
+<footer class="foot">
+	<div>
+		<p>© 2014 - 3014&emsp;Powered By <a href="http://git.oschina.net/tower1229/frontend" target="_blank">Frontend</a> </p>
+	</div>
+</footer>
+
+
+<script src="./lib/sea.js" id="seajsnode" ></script>
+<script src="https://cdn.wilddog.com/js/client/current/wilddog.js"></script>
+<script>seajs.use('./app/index');</script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+@import (reference) "/less/set.less";
+.map-M1{}
+.map-M1-search{background:#e8e8e0;padding:18px;margin-bottom: 15px;}
+.map-M1-map{height: 345px;margin-bottom: 40px;}
+.map-M1-map img{max-width: none;}
+.map-M1-list{}
+.map-M1-list li{}
+.map-M1-list-bar{height: 38px;line-height: 38px;border-bottom:1px solid #f0f0f0;background:#f0f0f0;
+font-size:16px;position: relative;border-bottom: 1px solid #ccc;}
+.map-M1-list-bar .ion{color:#df001f;font-size:22px;}
+.map-M1-list-bar:after{content: "";position: absolute;right: 10px;top:10px;width: 8px;
+height: 8px;border:2px solid;border-color:transparent #888 #888 transparent;
+-webkit-transform:rotateZ(45deg);
+        transform:rotateZ(45deg);}
+.map-M1-list-cont{padding:10px 0;}
+.map-M1-list-cont ._t{font-size:14px;height: 24px;line-height: 24px;overflow: hidden;}
+.map-M1-list-cont ._p{height: 20px;line-height: 20px;overflow: hidden;}
+
+
+@media only screen and (max-width: @PadScreen) {
+
+}
+
+@media only screen and (max-width: @MobileScreen) {
+	.map-M1-map{display: none;}
+}

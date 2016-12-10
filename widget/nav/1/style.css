@@ -1,0 +1,34 @@
+.widget-nav { position:relative; z-index:10;}
+.widget-nav > ul > li { width:20%; float:left; position:relative; border-bottom:#002870 4px solid;}
+.widget-nav > ul > li > a { display:block; text-align:center; border-right:#ccc 1px solid; font-size:16px; height:40px; line-height:40px;}
+.widget-nav > ul > li.last > a { border-width:0;}
+
+/*下拉css*/
+.nav_layer01 { display:none; width:${layerWidth.value}; position:absolute; right:0; top:100%; background:${layerColor.value}; 
+border-bottom:#9f9f9f 3px solid; margin-top:4px; padding:20px;}
+.nav_layer01 ul { width:32%; float:left; border-right:#ccc 1px solid;}
+.nav_layer01 li a { display:block; line-height:1.5; padding:3px 0;}
+.nav_layer01 li a:hover { color:#e70010;}
+.nav_layer01 ._img { width:59%; float:right;}
+/*下拉css end*/
+
+.widget-nav .hover { border-bottom-color:#e70010;}
+.widget-nav .hover > a { color:#e70010;}
+.widget-nav .hover ._layer { display:block;}
+.mobile_key { display:none;}
+
+@media only screen and (max-width: 640px) {
+.mobile_key { display:block;}
+}
+
+
+
+
+
+
+
+
+
+
+
+

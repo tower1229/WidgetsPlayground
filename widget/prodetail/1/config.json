@@ -1,0 +1,136 @@
+{
+	"cssConfig": {
+		"leftWidth": {
+			"name": "左边宽度(%)",
+			"value": "48",
+			"type": "number"
+		},
+		"rightWidth":{
+			"name": "右边宽度(%)",
+			"value": "48",
+			"type": "number"
+		},
+		"albumMT":{
+			"name": "缩略图上边距(px)",
+			"value":6,
+			"type":"number"
+		},
+		"albumBW":{
+			"name": "缩略图线宽(px)",
+			"value":2,
+			"type":"number"
+		},
+		"albumBC":{
+			"name": "缩略图线色",
+			"value": "transparent",
+			"type": "text"
+		},
+		"albumActiveBC":{
+			"name": "当前缩略图线色",
+			"value": "#0080cc",
+			"type": "text"
+		},
+		"titleSize":{
+			"name": "标题字号(px)",
+			"value": 18,
+			"type": "number"
+		},
+		"titleWeight":{
+			"name": "标题粗细",
+			"value": "bold",
+			"type": "text"
+		},
+		"titleHeight":{
+			"name": "标题高度(px)",
+			"value":34,
+			"type": "number"
+		},
+		"titleColor":{
+			"name": "标题颜色",
+			"value": "#333",
+			"type": "text"
+		},
+		"btnMT":{
+			"name":"按钮上边距(px)",
+			"value":30,
+			"type":"number"
+		},
+		"btnHeight":{
+			"name":"按钮高度(px)",
+			"value":34,
+			"type":"number"
+		},
+		"btnWidth":{
+			"name":"按钮宽度(px)",
+			"value":138,
+			"type":"number"
+		},
+		"btnMR":{
+			"name":"按钮间距(px)",
+			"value":10,
+			"type":"number"
+		},
+		"btnBC":{
+			"name":"按钮边框色",
+			"value":"#ccc",
+			"type":"text"
+		},
+		"btnBG":{
+			"name":"按钮背景色",
+			"value":"#fff",
+			"type":"text"
+		},
+		"btnHoverBG":{
+			"name":"按钮悬浮背景色",
+			"value":"#ededed",
+			"type":"text"
+		},
+		"btnColor":{
+			"name":"按钮颜色",
+			"value":"#333",
+			"type":"text"
+		},
+		"recomeMT":{
+			"name":"推荐产品上边距(px)",
+			"value":30,
+			"type":"number"
+		}
+	},
+	"jsConfig": {
+		"albumAct":{
+			"name":"缩略图触发动作",
+			"value": "mouseenter",
+			"type": "select",
+			"option": ["mouseenter","click"]
+		}
+	},
+	"showConfig": {
+		"viewWidth": 12,
+		"imgProp": {
+			"name": "图片宽高比(%)",
+			"value": "75",
+			"type": "select",
+			"option": ["100","75","5625"]
+		},
+		"bigImg":{
+			"name": "大图尺寸",
+			"value": "800x600",
+			"type": "text"
+		},
+		"albumImg":{
+			"name": "缩略图尺寸",
+			"value": "200x150",
+			"type": "text"
+		},
+		"albumWidth":{
+			"name": "缩略图宽度(栅格)",
+			"value": 3,
+			"type": "number"
+		},
+		"recomeWidth":{
+			"name": "推荐产品宽度(栅格)",
+			"value": 4,
+			"type": "number"
+		}
+	}
+}

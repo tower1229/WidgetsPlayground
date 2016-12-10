@@ -1,0 +1,33 @@
+.widget-job-1 li.first { background: #e2f4fd; border-bottom: none; padding: 0; }
+.widget-job-1 li { border-bottom: 1px solid #cccccc; float: left; width: 100%; height: 34px; line-height: 34px; 
+	background: url("/widget/job/1/list_type.png") 15px center no-repeat; }
+.widget-job-1 li ._t1 { width: 18%; color: #0e90d2; }
+.widget-job-1 li ._t2 { width: 20%; }
+.widget-job-1 li ._t3 { width: 24%; }
+.widget-job-1 li ._t4 { width: 14%; }
+.widget-job-1 li ._t5 { width: 14%; }
+.widget-job-1 li ._t6 { width: 10%; }
+.widget-job-1 li.first ._ut { float: left; text-align: center; color: #0e90d2; font-weight: 700; font-size: 14px; }
+.widget-job-1 li ._un { float: left; text-align: center; height: 50px; cursor: pointer; white-space: nowrap; text-overflow: ellipsis; 
+	overflow: hidden; }
+.widget-job-1 li:hover { background: #ededed; }
+@media only screen and (max-width: 40rem) {
+ .widget-job-1 li ._t1 {
+ width: 30%;
+}
+ .widget-job-1 li ._t2 {
+ width: 30%;
+}
+ .widget-job-1 li ._t3 {
+ width: 40%;
+}
+ .widget-job-1 li ._t4 {
+ display: none;
+}
+ .widget-job-1 li ._t5 {
+ display: none;
+}
+ .widget-job-1 li ._t6 {
+ display: none;
+}
+}

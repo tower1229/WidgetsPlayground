@@ -1,0 +1,13 @@
+.widget-prolist-2-tab .tab_header { height: 58px; background: ${tabHeaderBG.value}; margin-bottom: 20px; }
+.widget-prolist-2-tab .tab_t { height: 55px; line-height: 55px; font-weight: 700; border-right: 1px solid ${tabtBRC.value}; font-size: 14px; border-top: 3px solid ${tabHeaderBG.value}; width:auto; padding:0 20px; }
+.widget-prolist-2-tab .tab_t_cur { color: ${tabtBTC.value}; border-top-color:${tabtBTC.value}; background: #ffffff;  }
+.widget-prolist-2-tab ._prolist li{ margin-bottom:10px;}
+.widget-prolist-2-tab ._img{ margin-bottom:${imgMb.value}px;}
+.widget-prolist-2-tab ._title { font-size: ${proTitleSize.value}px; line-height: 20px; height: 40px; overflow: hidden; font-weight:normal; border-bottom: 1px ${titleBBS.value} ${titleBBC.value}; padding-bottom:${titleMb.value}px; margin-bottom:${titleMb.value}px; }
+.widget-prolist-2-tab ._link .ion { font-size: 16px; }
+.widget-prolist-2-tab ._link {  }
+.widget-prolist-2-tab ._link a { color: #999999; }
+.widget-prolist-2-tab ._link ._toorder { float: left; }
+.widget-prolist-2-tab ._link ._download { float: right; }
+.widget-prolist-2-tab ._link ._download .ion { color: ${orderIcoC.value}; }
+.widget-prolist-2-tab a:hover { color: #0e90d2; }

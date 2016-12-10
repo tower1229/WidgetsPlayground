@@ -1,0 +1,85 @@
+{
+	"cssConfig": {
+		"leftWidth": {
+			"name": "左边宽度(px)",
+			"value": 200,
+			"type": "number"
+		},
+		"imgMargin": {
+			"name": "图片距右(px)",
+			"value": 15,
+			"type": "number"
+		},
+		"titleSize":{
+			"name": "标题字号(px)",
+			"value": 14,
+			"type": "number"
+		},
+		"titleHeight":{
+			"name": "标题高度(px)",
+			"value":26,
+			"type": "number"
+		},
+		"introColor":{
+			"name":"介绍颜色",
+			"value":"#999999",
+			"type":"text"
+		},
+		"introMB":{
+			"name":"介绍下边距(px)",
+			"value":10,
+			"type":"number"
+		},
+		"seleBG":{
+			"name":"下拉背景色",
+			"value":"#dddddd",
+			"type":"text"
+		},
+		"seleColor":{
+			"name":"下拉文字颜色",
+			"value":"#000000",
+			"type":"text"
+		},
+		"seleHeight":{
+			"name":"下拉高度(px)",
+			"value":26,
+			"type":"number"
+		},
+		"moreHeight":{
+			"name":"按钮高度",
+			"value":26,
+			"type":"number"
+		},
+		"moreBG":{
+			"name":"按钮背景色",
+			"value":"#0e90d2",
+			"type":"text"
+		},
+		"moreRadius":{
+			"name":"按钮圆角大小(px)",
+			"value":3,
+			"type":"number"
+		},
+		"moreColor":{
+			"name":"按钮文字颜色",
+			"value":"#ffffff",
+			"type":"text"
+		},
+		"moreBGHover":{
+			"name":"按钮背景悬浮色",
+			"value":"#0b6fa2",
+			"type":"text"
+		}
+	},
+	"jsConfig": {
+		
+	},
+	"showConfig": {
+		"viewWidth": 12,
+		"proImg":{
+			"name": "大图尺寸",
+			"value": "300x300",
+			"type": "text"
+		}
+	}
+}

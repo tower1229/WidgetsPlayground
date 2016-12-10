@@ -1,0 +1,70 @@
+{
+	"cssConfig": {
+		"channelTitleSize": {
+			"name": "标题栏字号",
+			"value": "16px",
+			"type": "text"
+		},
+		"inputHeight": {
+			"name": "搜索框高度",
+			"value": "30px",
+			"type": "text"
+		},
+		"channelTitlePadd": {
+			"name": "标题栏内边距",
+			"value": "20px",
+			"type": "text"
+		},
+		
+		"channelBackground": {
+			"name": "标题栏背景色",
+			"value": "#ededed",
+			"type": "color"
+		},
+		"searchBtnColor": {
+			"name": "搜索按钮颜色",
+			"value": "#0e90d2",
+			"type": "color"
+		},
+		"iconSize": {
+			"name": "搜索按钮图标大小",
+			"value": "16px",
+			"type": "text"
+		},
+		"listMargin": {
+			"name": "列表间距",
+			"value": "15px",
+			"type": "text"
+		},
+		"listFontSize": {
+			"name": "列表标题字号",
+			"value": "14px",
+			"type": "text"
+		},
+		"listConFontSize": {
+			"name": "列表内容字号",
+			"value": "14px",
+			"type": "text"
+		},
+		"listColor": {
+			"name": "列表标题字色",
+			"value": "#333",
+			"type": "color"
+		},
+		"listPadd": {
+			"name": "列表标题上下间距",
+			"value": "5px",
+			"type": "text"
+		}
+	},
+	"jsConfig": {},
+	"showConfig": {
+		"viewWidth": 12,
+		"channelTitle": {
+			"name": "栏目标题",
+			"value": "搜索结果",
+			"type": "text"
+		}
+
+	}
+}

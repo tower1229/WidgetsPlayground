@@ -1,0 +1,122 @@
+{
+	"cssConfig": {
+		"tagB": {
+			"name": "标签背景",
+			"value": "#cccccc",
+			"type": "text"
+		},
+		"tagColor": {
+			"name": "标签文字颜色",
+			"value": "#ffffff",
+			"type": "text"
+		},
+		"tagRadius": {
+			"name": "标签圆角(px)",
+			"value": 2,
+			"type": "number"
+		},
+		"btnSize": {
+			"name": "头部按钮大小(px)",
+			"value": 44,
+			"type": "number"
+		},
+		"btnColor": {
+			"name": "头部按钮颜色",
+			"value": "#cccccc",
+			"type": "text"
+		},
+		"btnHoverColor": {
+			"name": "按钮悬浮颜色",
+			"value": "#333333",
+			"type": "text"
+		},
+		"titleSize": {
+			"name": "标题字号(px)",
+			"value": 18,
+			"type": "number"
+		},
+		"titleColor": {
+			"name": "标题颜色",
+			"value": "#333333",
+			"type": "text"
+		},
+		"contB": {
+			"name": "内容背景色",
+			"value": "#ededed",
+			"type": "text"
+		},
+		"contColor": {
+			"name": "内容文字颜色",
+			"value": "#666666",
+			"type": "text"
+		},
+		"contPadd": {
+			"name": "内容区左右边距(px)",
+			"value": 30,
+			"type": "number"
+		},
+		"mainColor": {
+			"name": "亮色",
+			"value": "#0e90d2",
+			"type": "text"
+		},
+		"toolIconSize": {
+			"name": "工具图标大小(px)",
+			"value": 16,
+			"type": "number"
+		},
+		"pageLineColor": {
+			"name": "关联文章线条色",
+			"value": "#cccccc",
+			"type": "text"
+		},
+		"pageHeight": {
+			"name": "关联文章行高(px)",
+			"value": 30,
+			"type": "number"
+		},
+		"pageIconSize": {
+			"name": "关联文章图标大小(px)",
+			"value": 24,
+			"type": "number"
+		},
+		"pageFontSize": {
+			"name": "关联文章字号(px)",
+			"value": 14,
+			"type": "number"
+		},
+		"barMargin": {
+			"name": "分享栏上下间距(px)",
+			"value": 20,
+			"type": "number"
+		}
+	},
+	"jsConfig": {
+		"shareSize": {
+			"name": "分享图标尺寸",
+			"value": 16,
+			"type": "select",
+			"option": [16,24,32]
+		},
+		"shareType": {
+			"name": "分享图标类型",
+			"value": 1,
+			"type": "select",
+			"option": [0,1,2]
+		}
+	},
+	"showConfig": {
+		"viewWidth": 12,
+		"prevTitle": {
+			"name": "上一条",
+			"value": "上一条",
+			"type": "text"
+		},
+		"nextTitle": {
+			"name": "下一条",
+			"value": "下一条",
+			"type": "text"
+		}
+
+	}
+}

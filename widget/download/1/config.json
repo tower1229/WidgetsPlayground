@@ -1,0 +1,99 @@
+{
+	"cssConfig": {
+		"channelTitleSize": {
+			"name": "标题栏字号",
+			"value": "16px",
+			"type": "text"
+		},
+		"channelTitleWeight": {
+			"name": "标题栏文字粗细",
+			"value": "700",
+			"type": "text"
+		},
+		"channelTitleHeight": {
+			"name": "标题栏高度",
+			"value": "40px",
+			"type": "text"
+		},
+		"channelTitlePadd": {
+			"name": "标题栏内边距",
+			"value": "12px",
+			"type": "text"
+		},
+		"channelTitleColor": {
+			"name": "标题栏文字颜色",
+			"value": "#ffffff",
+			"type": "color"
+		},
+		"channelBackground": {
+			"name": "标题栏背景色",
+			"value": "#333333",
+			"type": "color"
+		},
+		"listHeight": {
+			"name": "列表高度",
+			"value": "30px",
+			"type": "text"
+		},
+		"listFontSize": {
+			"name": "列表字号",
+			"value": "14px",
+			"type": "text"
+		},
+		"listColor": {
+			"name": "列表字色",
+			"value": "#333333",
+			"type": "color"
+		},
+		"listHoverColor": {
+			"name": "列表悬浮色",
+			"value": "#0e90d2",
+			"type": "color"
+		},
+		"listBorderBottom": {
+			"name": "列表下边线",
+			"value": "1px solid #eee",
+			"type": "text"
+		},
+		"listBackground": {
+			"name": "列表背景色",
+			"value": "#ffffff",
+			"type": "color"
+		},
+		"listEvenBackground": {
+			"name": "偶数列表背景色",
+			"value": "#ededed",
+			"type": "color"
+		},
+		"listPadd": {
+			"name": "列表元素外边距",
+			"value": "10px",
+			"type": "text"
+		},
+		"iconSize": {
+			"name": "图标大小",
+			"value": "16px",
+			"type": "text"
+		},
+		"iconColor": {
+			"name": "图标颜色",
+			"value": "#0e90d2",
+			"type": "color"
+		}
+	},
+	"jsConfig": {},
+	"showConfig": {
+		"viewWidth": 12,
+		"channelTitle": {
+			"name": "栏目标题",
+			"value": "栏目标题 ",
+			"type": "text"
+		},
+		"listTitle": {
+			"name": "列表标题",
+			"value": "下载项目标题",
+			"type": "text"
+		}
+
+	}
+}

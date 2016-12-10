@@ -1,0 +1,7 @@
+.page{font-size: ${fontSize.value}; color: ${textColor.value}; text-align: center;}
+.page a,.page span { color: ${textColor.value};display: inline-block;border: 1px solid ${borderColor.value};padding: 5px 10px;vertical-align: middle;margin: 0 0 10px -1px;}
+.page .goprev{margin-right: ${sepMarginRight.value};}
+.page .gonext,.page .count {margin-left: ${sepMarginLeft.value};}
+.page a:hover,.page span{color:${hoverColor.value}; background: ${backgroundColor.value};}
+.page span.goprev,.page span.gonext {color: ${textColor.value}; background: none}
+.page span.count { border: 0;background: 0;color: ${textColor.value};}

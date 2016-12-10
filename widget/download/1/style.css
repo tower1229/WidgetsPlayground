@@ -1,0 +1,13 @@
+.widget-download-1-bar {font-size: ${channelTitleSize.value}; font-weight: ${channelTitleWeight.value}; 
+line-height: ${channelTitleHeight.value};  height: ${channelTitleHeight.value}; 
+  padding: 0 ${channelTitlePadd.value}; color: ${channelTitleColor.value}; 
+  background: ${channelBackground.value};}
+.widget-download-1-list li { height: ${listHeight.value}; line-height: ${listHeight.value}; overflow: hidden; 
+  vertical-align: top; color: ${listColor.value}; border-bottom: ${listBorderBottom.value};
+  background: ${listBackground.value}; font-size:${listFontSize.value}}
+.widget-download-1-list li:nth-child(even) { background: ${listEvenBackground.value};}
+.widget-download-1-list li a { color: ${listColor.value};}
+.widget-download-1-list li a:hover { color: ${listHoverColor.value};}
+.widget-download-1-list ._title { padding: 0 ${listPadd.value};}
+.widget-download-1-list li ._view {padding: 0 ${listPadd.value}; border-left: 1px solid #ededed; }
+.widget-download-1-list .ion { font-size: ${iconSize.value}; color: ${iconColor.value};}

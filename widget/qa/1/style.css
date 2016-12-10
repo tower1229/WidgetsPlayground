@@ -1,0 +1,11 @@
+.widget-qa-1 { font-size: ${fontSizeText.value}; }
+.widget-qa-1 li { background: #ffffff; position: relative; padding-left: 3em; margin-bottom: ${listPadding.value}; border-bottom: 1px solid #ededed; padding-bottom:${listPadding.value}; }
+.widget-qa-1 ._data { position: absolute; left: 0; top: 0; font-family: Arial;  font-size: ${numFontSize.value}; color: ${numColor.value}; line-height:30px;}
+.widget-qa-1 li ._title { cursor: pointer; font-weight: 700;  font-size:${fontSizeTitle.value}; line-height:30px;}
+.widget-qa-1 li ._p { padding-top: ${titlePadding.value}; line-height:30px; }
+@media only screen and (max-width: 480px) {
+.widget-qa-1 ._title { float: none; width: auto; }
+}
+
+
+

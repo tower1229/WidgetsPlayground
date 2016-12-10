@@ -1,0 +1,15 @@
+.widget-prolist-1 li { border-bottom: 1px solid #cccccc; padding: 15px 0; }
+.widget-prolist-1 ._img { float: left; width: ${leftWidth.value}px;
+	margin-right:${imgMargin.value}px;}
+.widget-prolist-1 ._title { font-size: ${titleSize.value}px; height: ${titleHeight.value}px; line-height: ${titleHeight.value}px; overflow: hidden; }
+.widget-prolist-1 ._p { color: ${introColor.value}; line-height: 26px; height: 78px; overflow: hidden; margin-bottom: ${introMB.value}px; }
+.widget-prolist-1 ._more { display: inline-block; line-height: ${moreHeight.value}px; padding: 0 30px; border-radius: ${moreRadius.value}px; color: ${moreColor.value}; background: ${moreBG.value}; cursor: pointer; float: right; }
+.widget-prolist-1 ._more:hover { background: ${moreBGHover.value}; }
+.widget-prolist-1 ._prosele { background: ${seleBG.value}; color: ${seleColor.value}; width:200px; height: ${seleHeight.value}px; line-height: ${seleHeight.value}px; }
+@media only screen and (max-width: 480px) {
+.widget-prolist-1 ._img { float: none; width: auto;}
+.widget-prolist-1 ._img img {width: 100%; }
+.widget-prolist-1 ._p { height: auto; }
+.widget-prolist-1 ._more{ float:none; margin-bottom:10px;}
+.widget-prolist-1 ._prosele{ float:none;}
+}

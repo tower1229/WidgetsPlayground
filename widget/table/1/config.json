@@ -1,0 +1,35 @@
+{
+	"cssConfig": {
+		
+	},
+	"jsConfig": {
+
+	},
+	"showConfig": {
+		"viewWidth": 8,
+		"border": {
+			"name": "边框",
+			"value": "有",
+			"type": "select",
+			"option": ["有","无"]
+		},
+		"hover": {
+			"name": "悬停背景",
+			"value": "无",
+			"type": "select",
+			"option": ["有","无"]
+		},
+		"condensed": {
+			"name": "紧缩表格",
+			"value": "否",
+			"type": "select",
+			"option": ["是","否"]
+		},
+		"resp": {
+			"name": "响应式表格",
+			"value": "否",
+			"type": "select",
+			"option": ["是","否"]
+		}
+	}
+}
