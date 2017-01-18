@@ -239,11 +239,11 @@ define(function(require, exports, module) {
 	});
 
 	//Bing壁纸
-	//https://jsonp.afeld.me/?callback=?&url=http%3A%2F%2Fcn.bing.com%2FHPImageArchive.aspx%3Fformat%3Djs%26idx%3D0%26n%3D1
-	$.getJSON("http://www.dujin.org/sys/bing/1920.php", function(data){
-	    var bing = data.url;
-	    $('body').css('background-image','url('+bing+')');
-	});
+	// $.getJSON("https://jsonp.afeld.me/?callback=?&url=http%3A%2F%2Fcn.bing.com%2FHPImageArchive.aspx%3Fformat%3Djs%26idx%3D0%26n%3D1", function(data){
+	//     var bing = data.url;
+	//     $('body').css('background-image','url('+bing+')');
+	// });
+	$('body').css('background-image','url("http://www.dujin.org/sys/bing/1920.php")');
 
 	module.exports = {
 		init:init
