@@ -97,7 +97,8 @@ define(function(require, exports, module) {
 		(function() {
 			var userMenuObject;
 			var resetUserMenu = function() {
-				userMenuObject.val(Storage.get('userInfo').name);
+				userMenuObject.val(0);
+				userMenuObject.text(Storage.get('userInfo').name);
 			};
 
 			//分发菜单事件
