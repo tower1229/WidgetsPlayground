@@ -115,8 +115,7 @@ define(function(require, exports, module) {
 				$('#userMenu').select({
 					data: userMenuDate,
 					hideSelected: true,
-					hook: 'thin',
-					callback: function(v) {
+					onChange: function(v) {
 						userMenuCase(v);
 					}
 				});
