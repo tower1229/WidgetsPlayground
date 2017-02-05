@@ -84,8 +84,8 @@ define(function(require, exports, module) {
 		var userInfo = {};
 		if (!Storage.get('userInfo') || !Storage.get('userInfo').id) {
 			var rand = random();
-			userInfo.id = '用户' + rand;
-			userInfo.name = '用户' + rand;
+			userInfo.id = rand;
+			userInfo.name = '访客';
 			userInfo.track = {
 				"record": []
 			};
@@ -99,27 +99,27 @@ define(function(require, exports, module) {
 				var userMenuDate = [{
 					"option": Storage.get('userInfo').name,
 					"value": 0,
-					"selected": true
+					"selected": true,
+					"disabled": true
 				}, {
-					"option": "<i class='ion'>&#xe634;</i>个人设置",
+					"option": "个人设置",
 					"value": 2
 				}, {
-					"option": "<i class='ion'>&#xe64d;</i>数据统计",
+					"option": "数据统计",
 					"value": 1
 				}, {
-					"option": "<i class='ion'>&#xe670;</i>立即更新",
+					"option": "立即更新",
 					"value": 3
 				}];
 				!$('#userMenu').length && $('.head_right').prepend('<select id="userMenu" class="userMenu"></select>');
 
 				$('#userMenu').select({
 					data: userMenuDate,
-					hideSelected: true,
 					onChange: function(v) {
 						userMenuCase(v);
 					}
 				});
-			}
+			};
 
 			//分发菜单事件
 			var userMenuCase = function(v) {
