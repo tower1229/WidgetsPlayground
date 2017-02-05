@@ -95,30 +95,9 @@ define(function(require, exports, module) {
 
 		//用户菜单
 		(function() {
-			var appendUserMenu = function() {
-				var userMenuDate = [{
-					"option": Storage.get('userInfo').name,
-					"value": 0,
-					"selected": true,
-					"disabled": true
-				}, {
-					"option": "个人设置",
-					"value": 2
-				}, {
-					"option": "数据统计",
-					"value": 1
-				}, {
-					"option": "立即更新",
-					"value": 3
-				}];
-				!$('#userMenu').length && $('.head_right').prepend('<select id="userMenu" class="userMenu"></select>');
-
-				$('#userMenu').select({
-					data: userMenuDate,
-					onChange: function(v) {
-						userMenuCase(v);
-					}
-				});
+			var userMenuObject;
+			var resetUserMenu = function() {
+				userMenuObject.val(Storage.get('userInfo').name);
 			};
 
 			//分发菜单事件
@@ -146,7 +125,7 @@ define(function(require, exports, module) {
 								$('html').addClass('docStatic');
 							},
 							onclose: function() {
-								appendUserMenu();
+								resetUserMenu();
 								$('html').removeClass('docStatic');
 							}
 						})
@@ -176,7 +155,7 @@ define(function(require, exports, module) {
 								})
 							},
 							onclose: function() {
-								appendUserMenu();
+								resetUserMenu();
 							}
 						})
 						break;
@@ -184,11 +163,36 @@ define(function(require, exports, module) {
 						//更新
 						Storage.clear();
 						index.init();
-						appendUserMenu();
+						resetUserMenu();
+						break;
+					default:
 						break;
 				}
+
 			};
-			appendUserMenu();
+			var userMenuDate = [{
+					"option": Storage.get('userInfo').name,
+					"value": 0,
+					"selected": true,
+					"disabled": true
+				}, {
+					"option": "个人设置",
+					"value": 2
+				}, {
+					"option": "数据统计",
+					"value": 1
+				}, {
+					"option": "立即更新",
+					"value": 3
+				}];
+				!$('#userMenu').length && $('.head_right').prepend('<select id="userMenu" class="userMenu"></select>');
+
+				userMenuObject = $('#userMenu').select({
+					data: userMenuDate,
+					onChange: function(v) {
+						userMenuCase(v);
+					}
+				});
 		})();
 
 		//捕捉用户生成配置事件
