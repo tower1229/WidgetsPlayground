@@ -144,6 +144,8 @@ margin-left: -160px;box-shadow: 0 1px 6px rgba(0,0,0,.2);color:#434343;}
 
 .userCount{padding:10px; height: 600px;overflow: auto;width:600px;font-family: serif;top:50%;margin-top: -300px;}
 .select-ui-options-thin li .ion{margin-right: .5em;font-size:1.3em;vertical-align: middle;}
+.globalMask{position: fixed;left: 0;top:0;width:100%;height: 100%;
+  cursor: default;z-index: 999;}
 
 .list-item {
   display: inline-block;
