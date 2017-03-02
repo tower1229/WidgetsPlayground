@@ -2,250 +2,294 @@
  * index
  */
 define(function(require, exports, module) {
-	var $ = require('jquery');
-	var base = require('base');
-	var com = require('./common');
-	var util = require('./util');
-	base.ajaxSetup($);
-	require('box');
+	"use strict";
+	const util = require('./util');
+	const Storage = util.Storage;
+	const box = require('box');
 
-	var etpl = util.etpl;
-	var Storage = util.Storage;
-	//组件存放路径
+	const component = require('./component');
+	Vue.mixin({
+		components: component
+	});
+
+	const Dropdown = require('./dropdown');
+	Vue.use(Dropdown);
+
 	window.widgetRootPath = seajs.root + '/widget/';
-	//初始排序
-	window.rootBy = 'bytitle';	//'bydate'
-	//初始标签
-	window.filterTag = [];
-	//组件扩展数据
-	window.widgetExt = {
-		temp 		: 'temp.htm',
-		css 		: 'style.css',
-		script 		: 'script.js',
-		album 		: 'album.jpg',
-		config 		: 'config.json'
-	};
-	//初始栏目
-	if(!util.jrChannel.get()){
-		util.jrChannel.set([0,0]);
-	}
-	
-	//导航
-	var nav = function(){
-		var navSync;
-		$('.main-nav').on('mouseenter', 'li', function() {
-			var _index = $(this).index();
-			clearTimeout(navSync);
-			if($('.sub-nav-'+_index).length){
-				$('.sub-nav').addClass('show').find('.sub-nav-'+_index).show()
-				.siblings().hide();
-			}else{
-				$('.sub-nav').removeClass('show');
-			}
-		}).on('mouseleave','li',function(e){
-			navSync = setTimeout(function() {
-				$('.sub-nav').removeClass('show');
-			}, 160);
-		}).on('click','li',function(){
-			if(!$(this).index()){
-				//首页
-				util.jrChannel.set([0,0]);
-				getChannel();
-				$('body,html').stop().animate({scrollTop:0},320);
-				$('.welcome').show();
-			}
-		});
-
-		$('.sub-nav').on('mouseenter', function() {
-			clearTimeout(navSync);
-		}).on('mouseleave', function() {
-			navSync = setTimeout($.proxy(function() {
-				$(this).removeClass('show');
-			}, this), 160);
-		}).on('click','li',function(){
-			var newChannel = [];
-			newChannel[1] = $(this).index();
-			newChannel[0] = $(this).attr('class').split('-')[2];
-			util.jrChannel.set(newChannel);
-			getChannel();
-			$('body,html').stop().animate({scrollTop:0},320);
-			$('.welcome').hide();
-		});
-		getChannel();
-	};
-	//定位栏目
-	var getChannel = function(bysearch){	
-		$('.main-nav-'+util.jrChannel.get()[0]).addClass('cur').siblings().removeClass('cur');
-		$('.sub-nav').find('.cur').removeClass('cur');
-
-		if($('.sub-nav-'+(util.jrChannel.get()[0])+'-'+util.jrChannel.get()[1]).length){
-			$('.sub-nav-'+(util.jrChannel.get()[0])+'-'+util.jrChannel.get()[1]).addClass('cur')
-			.siblings().removeClass('cur');
-		}
-
-		if(!bysearch){
-			util.showWidgets();
-		}	
-	};
-
-	//启动
-	var init = function(){
-		$.ajax({
-			url: seajs.root + "/widget/data.json",
-			cache:false,
-			dataType:"json",
-			success:function(res){
-				var widgetsObj = {};
-				widgetsObj.widgets = res.widgets;
-				//在线升级
-				if(!Storage.get('version')){
-					Storage.clear();
-					init();
-				}else if((Storage.get('version')!==res.version.value)){
-					$.box.alert(res.version.description, function(){
-						Storage.clear();
-						init();
-					}, {
-						title:"即将升级到"+res.version.value,
-						oktext: "立即升级",
-						bgclose:false,
-						btnclose:false
-					});
-				};
-				Storage.set('version', res.version.value);
-				//存储组件信息
-				Storage.set('widgetData',widgetsObj);
-				//生成导航
-				var allwidgetsnum = 0;
-				for(var i=0;i<res.widgets.length;i++){
-					if(res.widgets[i].list){
-						var list2 = res.widgets[i].list,
-							channelwidgetsnum = 0;
-						for(var o=0;o<list2.length;o++){
-							if(list2[o].list){
-								channelwidgetsnum+=list2[o].list.length;
-							}
-						}
-						res.widgets[i]['nums'] = channelwidgetsnum;
-						allwidgetsnum+=channelwidgetsnum;
-					}
-				}
-				for(var i=0;i<res.widgets.length;i++){
-					if(res.widgets[i].title==='首页'){
-						res.widgets[i]['nums'] = allwidgetsnum;
-						break;
-					}
-				};
-
-				util.tpl('nav',res,nav);
-				
-			}
-		});
-	};
-	
-	//start 
-	init();
-
-	//首屏滚动
-	var filHeight = $('.mainCont').offset().top-50;
-	require('mousewheel');
-	$('.welcome').on('mousewheel',function(event){
-		if(event.deltaY<0){
-			$('body,html').stop(1).animate({scrollTop:filHeight},320);
-		}else{
-			$('body,html').stop(1).animate({scrollTop:0},320);
-		}
-
-	});
-
-	//搜索
-	var searchThro = base.throttle(function(){
-		console.log('searchThro')
-		util.jrChannel.set([0,0]);
-		getChannel('bysearch');
-		var keywords = $('#globalSearch').val();
-		var array = Storage.get('widgetData').widgets;
-		var _widgets = util.getWidgets(array,0,keywords);
-		util.mainTemp(_widgets);
-	},600,1000);
-	$('#globalSearch')
-	.on('keypress',searchThro)
-	.on('focus',function(){
-		$(this).val('').parent('.search').addClass('focus');
-		$('body,html').stop(1).animate({scrollTop:filHeight},320);
-	})
-	.on('blur',function(){
-		$(this).parent('.search').removeClass('focus');
-	});
-	//快捷键
-	require('mousetrap');
-	Mousetrap.bind('ctrl+f', function(e) {
-		if (e.preventDefault) {
-	        e.preventDefault();
-	    } else {
-	        e.returnValue = false;
-	    }
-     	$('#globalSearch').trigger('focus');
-    });
-    
-	//弹出演示界面
-	var getWidgetByName = function(name){
-		var sw = Storage.get('showingWidgets').widgets;
-		var i=0;
-		var len = sw.length;
-		for(;i<len;i++){
-			if(sw[i].widget==name){
-				return sw[i];
-			}
-		}
-		return null;
-	};
-	$('#widgetList').on('click','li',function(){
-		var that = $(this);
-		require.async('./play',function(play){
-			play([getWidgetByName(that.data('name'))]);
-		})
-	});
-
-	//通过代码呼出组件
-	$('#quickStart').on('submit',function(e){
-		e.preventDefault();
-		if($.trim($('#configCode').val())!='' && $.trim($('#configCode').val()).match(/^\[(.+:.+,*){1,}\]$/)){
-			var newWidget = JSON.parse($('#configCode').val());
-			//console.log(newWidget)
-			var widgetArray = [];
-			var compConfig = {};
-			$.each(newWidget,function(i,e){
-				if($.isPlainObject(e)){
-					if(e['userConfig']){
-						$.extend(compConfig,e.userConfig)
-					}
-					if(e['widget']){
-						widgetArray.push(getWidgetByName(e.widget));
-					}
-				}
-			});	
-			require.async('./play',function(play){		
-				play(widgetArray,compConfig);
-			})
-		}else{
-			$('#configCode').empty().focus();
-		}
-	});
-
-	//数据统计
-	require.async('./count',function(init){
-		init();
-	});
-
+	const widgetDataUrl = widgetRootPath + "data.json";
 	//Bing壁纸
 	// $.getJSON("https://jsonp.afeld.me/?callback=?&url=http%3A%2F%2Fcn.bing.com%2FHPImageArchive.aspx%3Fformat%3Djs%26idx%3D0%26n%3D1", function(data){
 	//     var bing = data.url;
-	//     $('body').css('background-image','url('+bing+')');
+	//     $('.body').css('background-image','url('+bing+')');
 	// });
-	$('body').css('background-image','url("http://www.dujin.org/sys/bing/1920.php")');
+	document.body.style.backgroundImage = 'url("http://www.dujin.org/sys/bing/1920.php")';
 
-	module.exports = {
-		init:init
-	};
+	let app = new Vue({
+		el: '#app',
+		data: {
+			userInfo: {
+				name: '游客',
+				track: {
+					record: []
+				}
+			},
+			widgets: [],
+			flatData: [],
+			version: [],
+			currentNav: [],
+			sortBy: '',
+			keywords: '',
+			bread: '',
+			tags: [],
+			filtertag: [],
+			callCode: '',
+			playingWidgets: [],
+			waitToChoose: false,
+			insertPlace: '',
+			choosenWidget: null,
+			showLoading: false
+		},
+		computed: {
+			showingWidgets: function() {
+				let result = [];
+				if (this.keywords) {
+					result = this.filterSearch;
+				} else {
+					result = this.filterChannel;
+				}
+				//标签筛选
+				if (this.filtertag.length) {
+					let newresult = [];
+					let copyfiltertag = this.filtertag;
+					result.forEach(function(wid, i) {
+						let mytag = wid.tag.split('/');
+						copyfiltertag.forEach(function(tag, o) {
+							if (mytag.includes(tag)) {
+								newresult.push(wid);
+							}
+						});
+					});
+					result = newresult;
+				}
+				//同步filtertag
+				if (!this.filtertag.length) {
+					let mytags = new Set();
+					result.forEach(function(e, i) {
+						if (e.tag) {
+							let thisTag = e.tag.split('/');
+							thisTag.forEach(function(tag) {
+								if (tag.trim()) {
+									mytags.add(tag.trim());
+								}
+							});
+						}
+					});
+					this.tags = Array.from(mytags);
+				}
+
+				return result;
+			},
+			filterChannel: function() {
+				let result = [];
+				if (this.widgets.length) {
+					let n_0 = parseInt(this.currentNav[0]);
+					let n_1 = parseInt(this.currentNav[1]);
+
+					if (!n_0 || isNaN(n_0) || n_1 === void(0) || isNaN(n_1)) {
+						result = this.flatData;
+						this.bread = this.widgets[0].title;
+					} else {
+						result = this.widgets[n_0].list[n_1].list;
+						this.bread = this.widgets[[n_0]].title + ' / ' + this.widgets[n_0].list[[n_1]].title;
+					}
+					this.showingWidgets = result;
+				}
+				return result;
+			},
+			filterSearch: function() {
+				//搜索
+				let result = this.flatData;
+				if (result.length && this.keywords) {
+					let key = this.keywords;
+					let search = new Set();
+					let nums = result.length;
+					//title完全匹配
+					result.forEach(function(e, i) {
+						if (e.title === key) {
+							search.add(e);
+						}
+					});
+					//widget完全匹配
+					result.forEach(function(e, i) {
+						if (e.widget === key) {
+							search.add(e);
+						}
+					});
+					//title包含匹配
+					result.forEach(function(e, i) {
+						if (e.title.indexOf(key) > -1) {
+							search.add(e);
+						}
+					});
+					//widget包含匹配
+					result.forEach(function(e, i) {
+						if (e.widget.indexOf(key) > -1) {
+							search.add(e);
+						}
+					});
+					//tag匹配
+					result.forEach(function(e, i) {
+						if (e.tag.indexOf(key) > -1) {
+							search.add(e);
+						}
+					});
+					//author匹配
+					result.forEach(function(e, i) {
+						if (e.author.indexOf(key) > -1) {
+							search.add(e);
+						}
+					});
+					result = Array.from(search);
+					this.showingWidgets = result;
+					return result;
+				} else {
+					this.showingWidgets = this.filterChannel;
+				}
+				return [];
+			}
+		},
+		methods: {
+			search: function(value) {
+				this.keywords = value.trim();
+			},
+			searchFocus: function() {
+				document.getElementById("main").scrollTop = document.getElementById("welcome").offsetHeight;
+			},
+			mainNavClick: function(currentNav) {
+				if (Array.isArray(currentNav)) {
+					this.currentNav = currentNav;
+				}
+				this.keywords = '';
+			},
+			subNavClick: function(currentNav) {
+				if (Array.isArray(currentNav)) {
+					this.currentNav = currentNav;
+				}
+				this.keywords = '';
+			},
+			filterTag: function(tags) {
+				this.filtertag = tags;
+			},
+			sort: function(by) {
+				this.sortBy = by;
+			},
+			widgetClick: function(widgetObject) {
+				if (this.waitToChoose) {
+					this.waitToChoose = false;
+					this.choosenWidget = widgetObject;
+				} else {
+					this.playingWidgets.push(widgetObject);
+				}
+			},
+			callWidget: function() {
+				let vm = this;
+				if (vm.callCode.trim() && vm.callCode.match(/^\[(.+:.+,*){1,}\]$/)) {
+					let newWidget = JSON.parse(vm.callCode);
+					let result = [];
+					newWidget.forEach(function(e) {
+						let clean = vm.flatData.find(function(value) {
+							return e.widget === value.widget;
+						});
+						if (e.userConfig) {
+							clean.userConfig = e.userConfig;
+						}
+						result.push(clean);
+					});
+					vm.playingWidgets = result;
+				} else {
+					vm.callCode = '';
+				}
+			},
+			update: function() {
+				let vm = this;
+				vm.showLoading = true;
+				axios.get(widgetDataUrl, {
+					emulateJSON: true
+				}).then(response => {
+					const res = response.data;
+					vm.version = res.version;
+					vm.widgets = res.widgets;
+					vm.showLoading = false;
+				});
+				Storage.clear();
+			},
+			setUserInfo: function(info) {
+				Object.assign(this.userInfo, info);
+				Storage.set('userInfo', this.userInfo);
+			}
+		},
+		created: function() {
+			let vm = this;
+			vm.showLoading = true;
+			let userInfo = Storage.get('userInfo');
+			if (userInfo) {
+				vm.setUserInfo(userInfo);
+			}
+			axios.get(widgetDataUrl).then(response => {
+				let res = response.data;
+				let allwidgetsnum = 0;
+				let homeIndex;
+				let flatData = [];
+				let each = function(eachArray) {
+					eachArray.forEach(function(e) {
+						if (e.list && e.list.length) {
+							each(e.list);
+						}
+						if (e.widget) {
+							flatData.push(e);
+						}
+					});
+				};
+				each(res.widgets);
+				vm.flatData = flatData;
+
+				res.widgets.forEach(function(cell, i) {
+					let channelwidgetsnum = 0;
+					if (Array.isArray(cell.list) && cell.list.length) {
+						cell.list.forEach(function(e) {
+							if (e.list) {
+								channelwidgetsnum += e.list.length;
+							}
+						});
+					}
+					cell.nums = channelwidgetsnum;
+					allwidgetsnum += channelwidgetsnum;
+					if (cell.title === '首页') {
+						homeIndex = i;
+					}
+				});
+				res.widgets[homeIndex].nums = allwidgetsnum;
+				vm.widgets = res.widgets;
+				Storage.set('widgets', res.widgets);
+
+				if (res.version) {
+					if (Storage.get('version') && (Storage.get('version').value !== res.version.value)) {
+						box.alert(res.version.description, function() {
+							vm.update();
+						}, {
+							title: "即将升级到" + res.version.value,
+							oktext: "立即升级",
+							bgclose: false,
+							btnclose: false
+						});
+					} else {
+						vm.version = res.version;
+						Storage.set('version', res.version);
+					}
+				}
+				vm.showLoading = false;
+			});
+		}
+	});
+
 });

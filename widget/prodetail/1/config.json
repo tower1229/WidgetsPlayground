@@ -105,7 +105,11 @@
 		}
 	},
 	"showConfig": {
-		"viewWidth": 12,
+		"viewWidth": {
+			"name": "栅格宽度",
+			"value": 12,
+			"type": "number"
+		},
 		"imgProp": {
 			"name": "图片宽高比(%)",
 			"value": "75",

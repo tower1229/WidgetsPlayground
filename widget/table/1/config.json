@@ -6,7 +6,11 @@
 
 	},
 	"showConfig": {
-		"viewWidth": 8,
+		"viewWidth": {
+			"name": "栅格宽度",
+			"value": 8,
+			"type": "number"
+		},
 		"border": {
 			"name": "边框",
 			"value": "有",

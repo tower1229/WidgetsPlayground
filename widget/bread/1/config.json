@@ -30,7 +30,11 @@
 
 	},
 	"showConfig": {
-		"viewWidth": 12,
+		"viewWidth": {
+			"name": "栅格宽度",
+			"value": 12,
+			"type": "number"
+		},
 		"headText": {
 			"name": "打头文字",
 			"value": "您当前的位置： ",

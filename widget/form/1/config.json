@@ -33,7 +33,11 @@
 	},
 	"jsConfig": {},
 	"showConfig": {
-		"viewWidth": 10,
+		"viewWidth": {
+			"name": "栅格宽度",
+			"value": 10,
+			"type": "number"
+		},
 		"labelTitle": {
 			"name": "标题文字",
 			"value": "表单项目",

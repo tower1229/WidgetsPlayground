@@ -15,7 +15,11 @@
 		
 	},
 	"showConfig": {
-		"viewWidth": 12,
+		"viewWidth": {
+			"name": "栅格宽度",
+			"value": 12,
+			"type": "number"
+		},
 		"placeImg":{
 			"name": "图片尺寸",
 			"value": "220x125",

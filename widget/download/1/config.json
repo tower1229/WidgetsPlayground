@@ -83,7 +83,11 @@
 	},
 	"jsConfig": {},
 	"showConfig": {
-		"viewWidth": 12,
+		"viewWidth": {
+			"name": "栅格宽度",
+			"value": 12,
+			"type": "number"
+		},
 		"channelTitle": {
 			"name": "栏目标题",
 			"value": "栏目标题 ",

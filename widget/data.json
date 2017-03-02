@@ -102,7 +102,7 @@
 				"tag": "下载/列表",
 				"author": "jerei.com",
 				"date": "2015-05-14"
-			},{
+			}, {
 				"widget": "search-1",
 				"title": "搜索结果",
 				"tag": "搜索/列表",
@@ -132,20 +132,16 @@
 		}, {
 			"title": "问答类",
 			"list": [{
-					"widget": "qa-1",
-					"title": "问答列表",
-					"tag": "问答",
-					"author": "UI",
-					"date": "2015-06-17"
-				}
-			]
+				"widget": "qa-1",
+				"title": "问答列表",
+				"tag": "问答",
+				"author": "UI",
+				"date": "2015-06-17"
+			}]
 		}]
 	}, {
 		"title": "Js组件",
 		"icon": "&#xe6b7;",
 		"list": []
-	}, {
-		"title": "工具",
-		"icon": "&#xe663;"
 	}]
 }
