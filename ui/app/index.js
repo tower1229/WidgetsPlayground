@@ -159,6 +159,9 @@ define(function(require, exports, module) {
 			}
 		},
 		methods: {
+			callLoading: function(bool){
+				this.showLoading = !!bool;
+			},
 			search: function(value) {
 				this.keywords = value.trim();
 			},

@@ -435,7 +435,7 @@ seajs.use("${scriptName}")`;
 						return [];
 					}
 					let vm = this;
-					vm.$emit('loading');
+					vm.$emit('loading',true);
 					Promise.all(widgetArray.map(function(widget) {
 						return axios.get(widget.conf);
 					})).then(function(posts) {
@@ -477,7 +477,7 @@ seajs.use("${scriptName}")`;
 						posts.forEach(function(e, i) {
 							widgetArray[i].jsTemp = e.data;
 						});
-						vm.$emit('loading');
+						vm.$emit('loading',false);
 						if (typeof cb === 'function') {
 							cb(widgetArray);
 						} else {
@@ -733,7 +733,7 @@ seajs.use("${scriptName}")`;
 			}
 		},
 		'loading': {
-			template: `<div v-if="show" class="globalMask" id="globalMask">
+			template: `<div v-if="show" class="globalMask">
 	<div class="bubblingG">
 		<span id="bubblingG_1"></span><span id="bubblingG_2"></span><span id="bubblingG_3"></span>
 	</div>
