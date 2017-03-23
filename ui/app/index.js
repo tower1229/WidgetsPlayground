@@ -22,7 +22,8 @@ define(function(require, exports, module) {
 	//     var bing = data.url;
 	//     $('.body').css('background-image','url('+bing+')');
 	// });
-	document.body.style.backgroundImage = 'url("http://www.dujin.org/sys/bing/1920.php")';
+	//document.body.style.backgroundImage = 'url("http://www.dujin.org/sys/bing/1920.php")';
+	document.body.style.backgroundImage = 'url("http://ztweixin.applinzi.com/bing.php")';
 
 	let app = new Vue({
 		el: '#app',
