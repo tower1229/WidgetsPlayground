@@ -238,6 +238,8 @@ define(function(require, exports, module) {
 			let userInfo = Storage.get('userInfo');
 			if (userInfo) {
 				vm.setUserInfo(userInfo);
+			}else{
+				Storage.set('userInfo', vm.userInfo);
 			}
 			axios.get(widgetDataUrl).then(response => {
 				let res = response.data;
