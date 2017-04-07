@@ -23,7 +23,7 @@ define(function(require, exports, module) {
 	//     $('.body').css('background-image','url('+bing+')');
 	// });
 	//document.body.style.backgroundImage = 'url("http://www.dujin.org/sys/bing/1920.php")';
-	document.body.style.backgroundImage = 'url("http://ztweixin.applinzi.com/bing.php")';
+	document.body.style.backgroundImage = 'url("http://host.refined-x.com/bing.php")';
 
 	let app = new Vue({
 		el: '#app',
