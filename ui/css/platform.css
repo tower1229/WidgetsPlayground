@@ -5,7 +5,7 @@
 ::-webkit-scrollbar-thumb:hover {border:1px solid #636363;background-color:#929292;}
 /* style */
 body,html{height: 100%;overflow: hidden;background-color:#efefef;}
-.body{position: relative; background-size:cover;background-position: center;background-attachment: fixed;height: 100%;}
+body{position: relative; background-size:cover;background-position: center;background-attachment: fixed;height: 100%;}
 .head{position: relative; background:#333;height: 45px; color:#fff;z-index: 2;}
 .head_T{position: absolute; font-size:22px;opacity: .9;float: left;margin:0 1em;
 	font-family: arial;line-height: 45px;cursor: pointer;}
