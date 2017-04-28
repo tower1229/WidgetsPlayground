@@ -180,6 +180,7 @@ define(function(require, exports, module) {
 					this.currentNav = currentNav;
 				}
 				this.keywords = '';
+				document.getElementById("main").scrollTop = document.getElementById("welcome").offsetHeight;
 			},
 			filterTag: function(tags) {
 				this.filtertag = tags;
