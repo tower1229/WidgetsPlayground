@@ -30,15 +30,17 @@ border-top:10px solid #ff6908;font-size:14px;}
 .menu-bar:hover{opacity: 1;width: 150px;}
 .main-nav{width: 100%;overflow: hidden; }
 .main-nav li{height: 45px;line-height: 45px;width: 150px;cursor: pointer;color:#777;}
+.main-nav li a{display: block;color: inherit;}
 .main-nav .ion{margin:0;width: 45px;text-align: center;font-size:22px;}
 .main-nav .cur{background:#ccc;color:#333;}
-.main-nav li:hover{background:#eee;color:#333;}
+.main-nav li a:hover{background:#eee;color:#333;}
 .sub-nav{position: absolute;left: 100%;top:0;height: 100%;overflow: hidden;background:#eee;
 border-right: 1px solid #ccc;color:#aaa;width: 0;overflow: hidden;-webkit-transition:width ease .32s;transition:width ease .32s;}
 .sub-nav ul{padding:0 0 14px; width: 120px;}
-.sub-nav li{height: 45px;line-height: 45px;cursor: pointer;padding:0 14px;color:#666;}
+.sub-nav li{height: 45px;line-height: 45px;cursor: pointer;color:#666;}
+.sub-nav li a{display: block;color: inherit;padding:0 14px;}
 .sub-nav .cur{background:#aaa;color:#fff;}
-.sub-nav li:hover{background:#666;color:#fff;}
+.sub-nav li a:hover{background:#666;color:#fff;}
 .sub-nav.show{width: 120px;}
 .mainCont{padding: 60px 20px 20px;background:rgba(255,255,255,.7);}
 /*欢迎屏*/
@@ -118,7 +120,7 @@ font-family: 'Consolas', 'Microsoft YaHei UI', 'Microsoft YaHei', Arial, Helveti
 .mergeQueue{height: 100%;}
 .mergeQueue ._queue{overflow: auto;}
 .mergeQueue ._queue li{position: relative; background:#fff; background-size:cover;}
-.mergeQueue ._queue ._layer{background:rgba(255,255,255,.8);color:#666;}
+.mergeQueue ._queue ._layer{background:rgba(255,255,255,.68);color:#666;}
 .mergeQueue ._queue ._del{position: absolute;right: .5em;top:.5em;font-size: 1.5em; cursor: pointer;}
 .mergeQueue ._queue ._del:hover{opacity: .8;}
 .mergeQueue ._queue h5{font-size:1.2em; color:#333;}

@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <title>前端组件管理系统-前端路上</title>
+    <meta content="Widgets,前端组件管理系统,前端路上" name="Keywords">
+    <meta content="前端组件管理系统，集存储、检索、调试、应用于一体的组件库2.0，旨在提高组件定制性和复用性，提高基于组件的前端开发效率。" name="Description">
+    <link rel="icon" href="favicon.ico">
+    <meta name="format-detection" content="telephone=no">
+    <link href="./css/ui.css" rel="stylesheet" />
+    <link href="./css/platform.css" rel="stylesheet" />
+    <style id="playingCss"></style>
+</head>
+
+<body style="background-image: url('http://host.refined-x.com/bing.php')">
+    <div class="body flex-col" id="app">
+        <my-head></my-head>
+        <div class="flex-1 flex-col main">
+            <my-nav></my-nav>
+            <main-view></main-view>
+        </div>
+    </div>
+    <script src="./lib/sea.js" id="seajsnode"></script>
+    <script src="lib/vue.js"></script>
+    <script src="lib/vuex.js"></script>
+    <script src="lib/vue-router.js"></script>
+    <script src="lib/axios.min.js"></script>
+    <script src="lib/etpl.js"></script>
+    <!-- <script src="https://cdn.wilddog.com/js/client/current/wilddog.js"></script> -->
+    <script>
+        seajs.root = '/WidgetsPlayground';
+        seajs.widgetRootPath = seajs.root + '/widgets';
+
+        seajs.config({
+            base: "http://static-zt.oss-cn-qingdao.aliyuncs.com/modules",
+            paths: {
+                "js": seajs.root + "/app"
+            },
+            alias: {
+                "audio": "audio/audio",
+                "copy": "copy/ZeroClipboard",
+                "flv": "flv/flv",
+                "hook": "hook/hook",
+                "jquery": "jquery/2/jquery",
+                "validform": "validform/validform",
+                "raty": "raty/raty",
+                "upload": "upload/upload",
+                "makethumb": "upload/makethumb",
+                "localResizeIMG": "upload/localResizeIMG",
+                "video": "video/video"
+            }
+        });
+        seajs.use('js/index');
+    </script>
+    <div style="display: none;">
+        <script src="http://s6.cnzz.com/stat.php?id=1261671774&web_id=1261671774" type="text/javascript"></script>
+    </div>
+</body>
+
+</html>

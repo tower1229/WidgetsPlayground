@@ -5,10 +5,26 @@
  * date: 2015-07-03
  */
 define(function(require, exports, module) {
-	var $ = require('jquery');
+	"use strict";
+	const $ = require('jquery');
 
 	module.exports = {
-		Storage: {
+		flatData: function(widgets) {
+			let flatData = [];
+			let each = function(eachArray) {
+				eachArray.forEach(function(e) {
+					if (e.list && e.list.length) {
+						each(e.list);
+					}
+					if (e.widget) {
+						flatData.push(e);
+					}
+				});
+			};
+			each(widgets);
+			return flatData;
+		},
+		storage: {
 			prefix: 'WDP-',
 			support: function() {
 				return localStorage

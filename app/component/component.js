@@ -1,9 +1,35 @@
 define(function(require, exports, module) {
 	"use strict";
-	var util = require('./util');
-	var Storage = util.Storage;
+	const util = require('js/util');
 
-	module.exports = {
+	const Dropdown = require('js/component/dropdown');
+	Vue.use(Dropdown);
+
+	const components = {
+		'main-view': {
+			template: `<div class="scroller flex-1" id="main">
+        <div class="welcome" id="welcome">
+            <div class="_cont wrap">
+                <div class="_T">欢迎使用前端组件管理系统</div>
+                <div class="_p">&emsp;&emsp;集存储、检索、调试、应用于一体的组件库2.0，旨在提高组件定制性和复用性，提高基于组件的前端开发效率。</div>
+                <quick-start></quick-start>
+            </div>
+        </div>
+        <div class="wrap mainCont">
+            <!-- 筛选 -->
+            <my-filter></my-filter>
+            <!-- 列表 -->
+            <component-list></component-list>
+        </div>
+        <play-time v-show="!this.$store.state.waitToChoose" v-if="this.$store.state.playingWidgets && this.$store.state.playingWidgets.length"></play-time>
+		<loading></loading>
+        <div class="foot">
+            <div>
+                <p>© 2014 - 3014&emsp;Powered By [ <a href="https://github.com/tower1229/Flow-UI" target="_blank">Flow-UI</a>, <a href="https://github.com/vuejs/vue" target="_blank">Vue</a> ] </p>
+            </div>
+        </div>
+    </div>`
+		},
 		'user-set': {
 			template: `<form class="userSetForm boxLayout" v-on:submit.prevent="subInfo">
 	<div class="boxHead tr">
@@ -15,13 +41,51 @@ define(function(require, exports, module) {
 	</div>
 	<button type="submit" class="btn btn-default">OK</button>
 </form>`,
-			props: ['info'],
+			computed: {
+				info: {
+					get: function() {
+						return this.$store.state.userInfo;
+					},
+					set: function(value) {
+						this.$store.commit('setUserInfo', {
+							name: value
+						});
+					}
+				}
+			},
 			methods: {
 				subInfo: function() {
 					this.$emit('subInfo', this.info);
 				},
 				close: function() {
 					this.$emit('close');
+				}
+			}
+		},
+		'quick-start': {
+			template: `<div class="quickStart">
+    <form v-on:submit.prevent="callWidget">
+        <div class="form-group">
+            <textarea v-model="callCode" class="form-control" id="configCode" placeholder="输入组件配置代码" spellcheck="false"></textarea>
+        </div>
+        <div class="form-group tc">
+            <button type="submit" class="btn btn-block btn-lg btn-primary">召唤组件</button>
+        </div>
+    </form>
+</div>`,
+			computed: {
+				callCode: {
+					get: function() {
+						return this.$store.state.callCode;
+					},
+					set: function(value) {
+						this.$store.commit('setCallCode', value);
+					}
+				}
+			},
+			methods: {
+				callWidget: function() {
+					this.$store.commit('callWidget');
 				}
 			}
 		},
@@ -92,7 +156,11 @@ define(function(require, exports, module) {
 	<user-set v-if="popwin==='userset'" :info="info" @subInfo="subInfo" @close="popwin=''"></user-set>
 	<data-count v-if="popwin==='dadtacount'" @close="popwin=''"></data-count>
 </div>`,
-			props: ['info'],
+			computed: {
+				info: function() {
+					return this.$store.state.userInfo
+				}
+			},
 			data: function() {
 				return {
 					focusClass: '',
@@ -113,29 +181,29 @@ define(function(require, exports, module) {
 				input: function(event) {
 					let vm = this;
 					setTimeout(function() {
-						vm.$emit('search', event.target.value);
+						vm.$store.commit('search', event.target.value);
 					}, 0);
 				},
 				focus: function() {
 					this.focusClass = 'focus';
-					this.$emit('search-focus');
+					this.$store.commit('scrollTop');
 				},
 				blur: function(event) {
 					let vm = this;
 					this.focusClass = '';
 					setTimeout(function() {
-						vm.$emit('search', event.target.value);
+						vm.$store.commit('search', event.target.value);
 					}, 0);
 				},
 				menuClick: function(item) {
 					if (item.win === 'checkupdate') {
-						this.$emit('update');
+						this.$store.dispatch('update');
 					} else {
 						this.popwin = item.win;
 					}
 				},
 				subInfo: function(info) {
-					this.$emit('userset', info);
+					this.$store.commit('setUserInfo', info);
 					this.popwin = '';
 				}
 			}
@@ -147,8 +215,10 @@ define(function(require, exports, module) {
 			@mouseenter="mainNavIn(index)"
 			@mouseleave="mainNavOut"
 			@click="mainNavClick(index)">
+			<router-link :to="{ path: index ? '/channel/' + index : '/'}">
 			<i class="ion" v-html="main.icon"></i>
 			<span>{{main.title}}</span> ({{main.nums}})
+			</router-link>
 		</li>
 	</ul>
 	<div class="sub-nav" :class="hoverMenu!=='' ? 'show' : ''">
@@ -156,11 +226,19 @@ define(function(require, exports, module) {
 			@mouseenter="subNavIn"
 			@mouseleave="subNavOut"
 			@click="subNavClick">
-			<li v-for="(subnav,index2) in sub.list" :class="['sub-nav-'+index+'-'+index2, currentNav[1]==index2 ? 'cur' : '']" :data-nav="index+','+index2">{{subnav.title}} ({{subnav.list.length}})</li>
+			<li v-for="(subnav,index2) in sub.list" :class="['sub-nav-'+index+'-'+index2, currentNav[1]==index2 ? 'cur' : '']" :data-nav="index+','+index2">
+			<router-link :to="{ path: '/channel/' + index + '/type/' + index2 }">
+				{{subnav.title}} ({{subnav.list.length}})
+			</router-link>
+			</li>
 		</ul>
 	</div>
 </div>`,
-			props: ['navdata'],
+			computed: {
+				navdata: function() {
+					return this.$store.getters.navData;
+				}
+			},
 			data: function() {
 				return {
 					hoverMenu: '',
@@ -184,8 +262,7 @@ define(function(require, exports, module) {
 					}, 160);
 				},
 				mainNavClick: function(index) {
-					this.currentNav = [index, '0'];
-					this.$emit('main-nav-click', this.currentNav);
+					this.$store.commit('scrollTop');
 				},
 				subNavIn: function() {
 					clearTimeout(this.navSync);
@@ -197,9 +274,29 @@ define(function(require, exports, module) {
 					}, 160);
 				},
 				subNavClick: function(event) {
-					this.currentNav = event.target.dataset.nav.split(',');
-					this.$emit('sub-nav-click', this.currentNav);
+					this.$store.commit('scrollTop');
+				},
+				getNav: function(router) {
+					if (router.params.cid !== void 0) {
+						this.currentNav.splice(0, 1, router.params.cid);
+					} else {
+						this.currentNav.splice(0, 1, '0');
+					}
+					if (this.$route.params.tid !== void 0) {
+						this.currentNav.splice(1, 1, router.params.tid);
+					} else {
+						this.currentNav.splice(1);
+					}
+					this.$store.commit('updateNav', this.currentNav);
 				}
+			},
+			watch: {
+				$route: function(to, from) {
+					this.getNav(to);
+				}
+			},
+			created: function() {
+				this.getNav(this.$route);
 			}
 		},
 		'component-list': {
@@ -221,8 +318,13 @@ define(function(require, exports, module) {
 		</li>
 	</transition-group>
 </div>`,
-			props: ['mywidgets', 'sort'],
 			computed: {
+				showingWidgets: function() {
+					return this.$store.getters.showingWidgets;
+				},
+				sort: function() {
+					return this.$store.state.sortBy;
+				},
 				widgets: function() {
 					let dateToNum = function(dataType) {
 						var _num = 0,
@@ -237,22 +339,22 @@ define(function(require, exports, module) {
 					let result;
 					switch (this.sort) {
 						case 'title':
-							result = this.mywidgets.sort(function(a, b) {
+							result = this.showingWidgets.sort(function(a, b) {
 								return a.title.localeCompare(b.title);
 							});
 							break;
 						case 'date':
-							result = this.mywidgets.sort(function(a, b) {
+							result = this.showingWidgets.sort(function(a, b) {
 								return dateToNum(b.date) - dateToNum(a.date);
 							});
 							break;
 						default:
-							result = this.mywidgets;
+							result = this.showingWidgets;
 							break;
 					}
 					result.forEach(function(e, i) {
 						const widgetInfo = e.widget.split('-');
-						let widgetPath = widgetRootPath + widgetInfo[0] + '/';
+						let widgetPath = seajs.widgetRootPath + '/' + widgetInfo[0] + '/';
 						const widgetExt = {
 							temp: 'temp.htm',
 							css: 'style.css',
@@ -277,11 +379,11 @@ define(function(require, exports, module) {
 						let widget = this.widgets.find(function(value) {
 							return value.widget === widgetName;
 						});
-						this.$emit('widgetclick', widget);
+						this.$store.dispatch('widgetClick', widget);
 					}
 				},
 				albumerror: function(event) {
-					event.target.src = seajs.root + '/ui/images/nopic.jpg';
+					event.target.src = seajs.root + '/images/nopic.jpg';
 				}
 			}
 		},
@@ -300,13 +402,20 @@ define(function(require, exports, module) {
             </div>
             <div class="form-group" id="sortWrap">
                 <label>排序：</label>
-                <span class="btn btn-default" :class="sortBy === 'title' ? 'active' : ''" @click="sortByTitle">名称排序</span>
-                <span class="btn btn-default" :class="sortBy === 'date' ? 'active' : ''" @click="sortByDate">时间排序</span>
+                <span class="btn btn-default" :class="sortBy === 'title' ? 'active' : ''" @click="triggerSort('title')">名称排序</span>
+                <span class="btn btn-default" :class="sortBy === 'date' ? 'active' : ''" @click="triggerSort('date')">时间排序</span>
             </div>
         </fieldset>
     </form>
 </div>`,
-			props: ['tags', 'bread'],
+			computed: {
+				tags: function() {
+					return this.$store.state.tags;
+				},
+				bread: function() {
+					return this.$store.state.bread;
+				}
+			},
 			data: function() {
 				return {
 					showtag: [],
@@ -324,65 +433,89 @@ define(function(require, exports, module) {
 					} else {
 						this.showtag.push(text);
 					}
-					this.$emit('filter-tag', this.showtag);
+					this.doFilter();
 				},
 				allClick: function() {
 					this.showtag = [];
-					this.$emit('filter-tag', this.showtag);
+					this.doFilter();
 				},
-				sortByTitle: function() {
-					if (this.sortBy === 'title') {
+				triggerSort: function(by) {
+					if (this.sortBy === by) {
 						this.sortBy = '';
 					} else {
-						this.sortBy = 'title';
+						this.sortBy = by;
 					}
-					this.$emit('sort-by', this.sortBy);
+					this.doFilter();
 				},
-				sortByDate: function() {
-					if (this.sortBy === 'date') {
-						this.sortBy = '';
-					} else {
-						this.sortBy = 'date';
+				doFilter: function(to){
+					let thePath = to ? to.path : null;
+					let theQuery = {};
+					if(this.showtag.length){
+						theQuery.tag = JSON.stringify(this.showtag);
 					}
-					this.$emit('sort-by', this.sortBy);
+					
+					if(this.sortBy){
+						theQuery.sort = this.sortBy;
+					}
+					
+					this.$router.push({ path: thePath, query: theQuery});
+
+					this.$store.commit('filterTag', this.showtag);
+					this.$store.commit('sort', this.sortBy);
 				}
+			},
+			created: function(){
+				if(this.$route.query.tag){
+					this.showtag = JSON.parse(this.$route.query.tag);
+				}
+				if(this.$route.query.sort){
+					this.sortBy = this.$route.query.sort;
+				}
+				this.doFilter();
 			}
 		},
 		'play-time': {
 			template: `<div class="playTime">
 	<div class="playTime_head">
 		<div class="playTime_title">{{title}}</div>
-		<div class="playTime_close text-danger" @click="close"><i class="ion">&#xe6b0;</i></div>
+		<div class="playTime_close text-danger" @click="close"><i class="ion">&#xe647;</i></div>
 	</div>
 	<div class="wrap play_area">
 		<div class="row" v-html="html"></div>
 	</div>
 	<input type="text" style="position:absolute;top:-999em;z-index:-1;" id="copyTargetInput" />
 	<config-pannel v-if="playWidgets.length" 
-		:widgets="playWidgets" 
-		@changed="pannelChange"
+		:widgets="playWidgets"
+		:diffCode="diffCode"
 		@copy="pannelCopyHandle"
 		@add="addWidget"
+		@updateUserConfig="genHtml"
 	></config-pannel>
 </div>`,
-			props: ['widgets', 'choosen'],
 			data: function() {
 				return {
 					playWidgets: [],
+					html: '',
 					css: '',
 					js: '',
-					insertPlace: ''
+					insertPlace: '',
+					diffCode: []
 				};
 			},
 			computed: {
+				choosen: function() {
+					return this.$store.state.choosenWidget;
+				},
 				title: function() {
 					let result = [];
 					this.playWidgets.forEach(function(e, i) {
 						result.push(e.title);
 					});
 					return result.join(' + ');
-				},
-				html: function() {
+				}
+			},
+			methods: {
+				genHtml: function() {
 					let html = '';
 					let css = '';
 					let js = '';
@@ -392,13 +525,35 @@ define(function(require, exports, module) {
 						if (scriptNode) {
 							document.body.removeChild(scriptNode);
 						}
+						//diffCode
+						let diff = [];
 						vm.playWidgets.forEach(function(e, i) {
-							let htmlfragment = '<div class="' + 'span-' + (e.configFinnal.showConfig.viewWidth.value || 12) + '">' + etpl.compile(e.htmlTemp)(Object.assign({}, e.configFinnal.showConfig, {id: e.id})) + '</div>';
+							let configFinnal = JSON.parse(JSON.stringify(e.confBack)); //深拷贝
+							for (let x in configFinnal) {
+								if (e.userConfig[x]) {
+									for (let uckey in e.userConfig[x]) {
+										Object.assign(configFinnal[x][uckey], e.userConfig[x][uckey]);
+									}
+								}
+							}
+							e.configFinnal = configFinnal;
+							let htmlfragment = '<div class="' + 'span-' + (e.configFinnal.showConfig.viewWidth.value || 12) + '">' + etpl.compile(e.htmlTemp)(Object.assign({}, e.configFinnal.showConfig, {
+								id: e.id
+							})) + '</div>';
 							html += vm.wrapString(htmlfragment, 'html', e.widget);
-							let cssfragment = etpl.compile(e.cssTemp)(Object.assign({}, e.configFinnal.cssConfig, {id: e.id}));
+							let cssfragment = etpl.compile(e.cssTemp)(Object.assign({}, e.configFinnal.cssConfig, {
+								id: e.id
+							}));
 							css += vm.wrapString(cssfragment, 'css', e.widget);
-							let jsfragment = etpl.compile(e.jsTemp)(Object.assign({}, e.configFinnal.jsConfig, {id: e.id}));
+							let jsfragment = etpl.compile(e.jsTemp)(Object.assign({}, e.configFinnal.jsConfig, {
+								id: e.id
+							}));
 							js += vm.wrapString(jsfragment, 'javascript', e.widget);
+							diff.push({
+								userConfig: e.userConfig,
+								widget: e.widget
+							});
+							vm.diffCode = diff;
 						});
 						console.log('组件html加载完成');
 						css = css.trim();
@@ -426,16 +581,14 @@ seajs.use("${scriptName}")`;
 							vm.js = js;
 						}
 					}
-					return html.trim();
-				}
-			},
-			methods: {
+					vm.html = html.trim();
+				},
 				getTemp: function(widgetArray, cb) {
 					if (!Array.isArray(widgetArray)) {
 						return [];
 					}
 					let vm = this;
-					vm.$emit('loading',true);
+					this.$store.commit('callLoading', true);
 					Promise.all(widgetArray.map(function(widget) {
 						return axios.get(widget.conf);
 					})).then(function(posts) {
@@ -443,11 +596,11 @@ seajs.use("${scriptName}")`;
 							e.confBack = posts[i].data;
 							e.id = parseInt(Math.random() * 1e6);
 							e.userConfig = e.userConfig || {};
-							let configFinnal = Object.assign({}, e.confBack);
+							let configFinnal = JSON.parse(JSON.stringify(e.confBack)); //深拷贝
 							for (let x in configFinnal) {
 								if (e.userConfig[x]) {
 									for (let uckey in e.userConfig[x]) {
-										Vue.util.extend(configFinnal[x][uckey], e.userConfig[x][uckey]);
+										configFinnal[x][uckey] = e.userConfig[x][uckey];
 									}
 								}
 							}
@@ -477,11 +630,12 @@ seajs.use("${scriptName}")`;
 						posts.forEach(function(e, i) {
 							widgetArray[i].jsTemp = e.data;
 						});
-						vm.$emit('loading',false);
+						vm.$store.commit('callLoading', false);
 						if (typeof cb === 'function') {
 							cb(widgetArray);
 						} else {
 							vm.playWidgets = widgetArray;
+							vm.genHtml();
 						}
 					});
 				},
@@ -531,15 +685,15 @@ seajs.use("${scriptName}")`;
 				close: function() {
 					let vm = this;
 					//保存使用数据
-					let _userInfo = Storage.get('userInfo');
+					let _userInfo = util.storage.get('userInfo');
 					vm.playWidgets.forEach(function(e, i) {
 						let thisone = Object.assign({}, e);
 						thisone.date = util.getDate();
 						thisone.set = vm.getConfigArray(e.userConfig);
 						_userInfo.track.record.push(thisone);
 					});
-					Storage.set('userInfo', _userInfo);
-					vm.$emit('close');
+					util.storage.set('userInfo', _userInfo);
+					this.$store.commit('setPlaying', []);
 				},
 				wrapString: function(string, type, decorate) {
 					var _before = '',
@@ -563,26 +717,9 @@ seajs.use("${scriptName}")`;
 					}
 					return _before + string + _after;
 				},
-				pannelChange: function(target) {
-					let vm = this;
-					let key = target.dataset.key;
-					let val = isNaN(parseFloat(target.value)) ? target.value : parseFloat(target.value);
-					let configItem = target.dataset.item;
-					let widgetIndex = target.dataset.index;
-
-					let diffpart = {};
-					diffpart[configItem] = {};
-					diffpart[configItem][key] = {
-						"value": val
-					};
-					let theNode = Object.assign({}, vm.playWidgets[widgetIndex]);
-					theNode.userConfig = Vue.util.extend(theNode.userConfig, diffpart);
-					theNode.configFinnal[configItem][key].value = val;
-					Vue.set(vm.playWidgets, widgetIndex, theNode);
-				},
 				addWidget: function(place) {
 					this.insertPlace = place;
-					this.$emit('beforechoose');
+					this.$store.commit('setWaitToChoose', true);
 				}
 			},
 			watch: {
@@ -600,12 +737,13 @@ seajs.use("${scriptName}")`;
 								default:
 									console.warn('insert place error!');
 							}
+							vm.genHtml();
 						});
 					}
 				}
 			},
 			created: function() {
-				this.getTemp(util.copyArr(this.widgets));
+				this.getTemp(this.$store.state.playingWidgets);
 			}
 		},
 		'config-pannel': {
@@ -673,24 +811,12 @@ seajs.use("${scriptName}")`;
         </div>
     </div>
 </div>`,
-			props: ['widgets'],
+			props: ['widgets', 'diffCode'],
 			data: function() {
 				return {
 					showingPannel: '',
 					timer: null
 				};
-			},
-			computed: {
-				diffCode: function() {
-					let diff = [];
-					this.widgets.forEach(function(e) {
-						diff.push({
-							userConfig: e.userConfig,
-							widget: e.widget
-						});
-					});
-					return diff;
-				}
 			},
 			methods: {
 				togglePannel: function(pannelName) {
@@ -702,7 +828,18 @@ seajs.use("${scriptName}")`;
 				},
 				configChange: function(target) {
 					let vm = this;
-					vm.$emit('changed', target);
+					let key = target.dataset.key;
+					let val = isNaN(parseFloat(target.value)) ? target.value : parseFloat(target.value);
+					let configItem = target.dataset.item;
+					let widgetIndex = target.dataset.index;
+					if (!vm.widgets[widgetIndex].userConfig[configItem]) {
+						vm.widgets[widgetIndex].userConfig[configItem] = {};
+					}
+					if (!vm.widgets[widgetIndex].userConfig[configItem][key]) {
+						vm.widgets[widgetIndex].userConfig[configItem][key] = {};
+					}
+					vm.widgets[widgetIndex].userConfig[configItem][key].value = val;
+					vm.$emit('updateUserConfig');
 				},
 				reset: function() {
 					let vm = this;
@@ -710,6 +847,7 @@ seajs.use("${scriptName}")`;
 						e.userConfig = {};
 						Vue.set(vm.widgets, i, e);
 					});
+					vm.$emit('updateUserConfig');
 				},
 				copyDiff: function() {
 					this.$emit('copy', JSON.stringify(this.diffCode));
@@ -738,8 +876,18 @@ seajs.use("${scriptName}")`;
 		<span id="bubblingG_1"></span><span id="bubblingG_2"></span><span id="bubblingG_3"></span>
 	</div>
 </div>`,
-			props: ['show']
+			computed: {
+				show: function() {
+					return this.$store.state.showLoading;
+				}
+			}
 		}
 
 	};
+
+	Vue.mixin({
+		components
+	});
+
+	module.exports = components;
 });
