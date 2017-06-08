@@ -44,7 +44,7 @@ define(function(require, exports, module) {
 				result.forEach(function(wid, i) {
 					let mytag = wid.tag.split('/');
 					copyfiltertag.forEach(function(tag, o) {
-						if (mytag.includes(tag)) {
+						if (util.arrIncludes(mytag, tag)) {
 							newresult.push(wid);
 						}
 					});

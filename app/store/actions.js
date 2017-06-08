@@ -1,19 +1,64 @@
 define(function(require, exports, module) {
 	"use strict";
 	const util = require('js/util');
-
+	const box = require('box');
+	const wilddogApp = require('js/wilddog');
+	
 	module.exports = {
+		setUserRecord: function(context, user) {
+			let ref = wilddogApp.sync().ref();
+            ref.child('/users/' + user.uid + '/track').set({
+                "record": JSON.stringify(user.track.record)
+            }, function(error) {
+                if (error) {
+                    box.msg(error, {
+                        color:'danger'
+                    });
+                }else{
+                    console.log('同步用户记录到野狗云端成功');
+                }
+            });
+		},
+		setUserInfo: function(context, info) {
+			let currentUser = wilddogApp.auth().currentUser;
+			return new Promise(function(resolve, reject) {
+				if (info && currentUser) {
+					currentUser.updateProfile({
+							'photoURL': info.photoUrl || '',
+							'displayName': info.displayName || '',
+						})
+						.then(function(user) {
+							context.commit('updateUserInfo', user);
+							resolve(user);
+						})
+						.catch(function(err) {
+							console.info("update user info failed.", err);
+						});
+				} else {
+					reject(error);
+				}
+			});
+		},
 		update: function(context) {
 			context.commit('callLoading', true);
 			axios.get(seajs.widgetRootPath + "/data.json", {
 				emulateJSON: true
 			}).then(response => {
-				const res = response.data;
+				let res = response.data;
+				let localVersion = util.storage.get('version');
+				util.storage.clear();
+				if (localVersion && (localVersion.value !== res.version.value)) {
+					box.alert(res.version.description, null, {
+						title: "升级到" + res.version.value,
+						bgclose: false,
+						btnclose: false
+					});
+				}
 				context.commit('setVersion', res.version);
 				context.commit('setWidgets', res.widgets);
 				context.commit('callLoading', false);
 			});
-			util.storage.clear();
+
 		},
 		widgetClick: function(context, widgetObject) {
 			if (context.state.waitToChoose) {

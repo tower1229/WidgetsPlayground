@@ -8,7 +8,12 @@ define(function(require, exports, module) {
 	const store = new Vuex.Store({
 		state: {
 			userInfo: {
-				name: '游客',
+				displayName: '',
+				phone: '',
+				email: '',
+				photoURL: '',
+				emailVerified: false,
+				uid:'',
 				track: {
 					record: []
 				}

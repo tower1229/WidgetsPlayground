@@ -19,7 +19,13 @@ define(function(require, exports, module) {
 			state.keywords = value.trim();
 		},
 		scrollTop: function() {
-			document.getElementById("main").scrollTop = document.getElementById("welcome").offsetHeight;
+			let Main = document.getElementById("main");
+			let Target = document.getElementById("welcome");
+			if(Main && Target){
+				Main.scrollTop = Target.offsetHeight;
+			}else{
+				console.warn('scrollTop: error');				
+			}
 		},
 		updateNav: function(state, currentNav) {
 			if (Array.isArray(currentNav)) {
@@ -56,16 +62,17 @@ define(function(require, exports, module) {
 				state.callCode = '';
 			}
 		},
-		setUserInfo: function(state, info) {
-			Object.assign(state.userInfo, info);
-			util.storage.set('userInfo', state.userInfo);
+		updateUserInfo: function(state, info) {
+			Object.keys(state.userInfo).forEach(function(e,i){
+				state.userInfo[e] = info[e] || state.userInfo[e];
+			});
 		},
 		setWidgets: function(state, widgets) {
 			state.widgets = widgets;
-			util.storage.set('widgets', widgets);
 		},
 		setVersion: function(state, version) {
 			state.version = version;
+			util.storage.set('version', version);
 		}
 	};
 });

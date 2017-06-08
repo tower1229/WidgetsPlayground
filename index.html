@@ -9,6 +9,7 @@
     <title>前端组件管理系统-前端路上</title>
     <meta content="Widgets,前端组件管理系统,前端路上" name="Keywords">
     <meta content="前端组件管理系统，集存储、检索、调试、应用于一体的组件库2.0，旨在提高组件定制性和复用性，提高基于组件的前端开发效率。" name="Description">
+    <meta name="author" content="tower1229@gmail.com">
     <link rel="icon" href="favicon.ico">
     <meta name="format-detection" content="telephone=no">
     <link href="./css/ui.css" rel="stylesheet" />
@@ -17,12 +18,9 @@
 </head>
 
 <body style="background-image: url('http://host.refined-x.com/bing.php')">
-    <div class="body flex-col" id="app">
-        <my-head></my-head>
-        <div class="flex-1 flex-col main">
-            <my-nav></my-nav>
-            <main-view></main-view>
-        </div>
+    <div id="app" class="body">
+        <router-view></router-view>
+        <loading></loading>
     </div>
     <script src="./lib/sea.js" id="seajsnode"></script>
     <script src="lib/vue.js"></script>
@@ -30,7 +28,7 @@
     <script src="lib/vue-router.js"></script>
     <script src="lib/axios.min.js"></script>
     <script src="lib/etpl.js"></script>
-    <!-- <script src="https://cdn.wilddog.com/js/client/current/wilddog.js"></script> -->
+    <script src="https://cdn.wilddog.com/sdk/js/2.5.8/wilddog.js"></script>
     <script>
         seajs.root = '/WidgetsPlayground';
         seajs.widgetRootPath = seajs.root + '/widgets';
@@ -55,6 +53,7 @@
             }
         });
         seajs.use('js/index');
+
     </script>
     <div style="display: none;">
         <script src="http://s6.cnzz.com/stat.php?id=1261671774&web_id=1261671774" type="text/javascript"></script>

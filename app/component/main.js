@@ -1,9 +1,10 @@
 define(function(require, exports, module) {
 	"use strict";
+	const box = require('box');
 	const util = require('js/util');
-
 	const Dropdown = require('js/component/dropdown');
 	Vue.use(Dropdown);
+	const wilddogApp = require('js/wilddog');
 
 	const components = {
 		'main-view': {
@@ -22,10 +23,12 @@ define(function(require, exports, module) {
             <component-list></component-list>
         </div>
         <play-time v-show="!this.$store.state.waitToChoose" v-if="this.$store.state.playingWidgets && this.$store.state.playingWidgets.length"></play-time>
-		<loading></loading>
         <div class="foot">
             <div>
-                <p>© 2014 - 3014&emsp;Powered By [ <a href="https://github.com/tower1229/Flow-UI" target="_blank">Flow-UI</a>, <a href="https://github.com/vuejs/vue" target="_blank">Vue</a> ] </p>
+                <p>© 2014 - 3014&emsp;Powered By [ <a href="https://github.com/tower1229/Flow-UI" target="_blank">Flow-UI</a>,
+                <a href="https://github.com/vuejs/vue" target="_blank">Vue</a>,
+                <a href="https://github.com/vuejs/vuex/" target="_blank">Vuex</a>,
+                <a href="https://github.com/vuejs/vue-router/" target="_blank">Vue-Router</a> ] </p>
             </div>
         </div>
     </div>`
@@ -37,7 +40,7 @@ define(function(require, exports, module) {
 	</div>
 	<div class="form-group">
 		<label class="control-label" for="userSetName">怎么称呼：</label>
-		<input type="text" class="form-control" id="userSetName" v-model="info.name">
+		<input type="text" class="form-control" id="userSetName" v-model="info.displayName">
 	</div>
 	<button type="submit" class="btn btn-default">OK</button>
 </form>`,
@@ -47,8 +50,8 @@ define(function(require, exports, module) {
 						return this.$store.state.userInfo;
 					},
 					set: function(value) {
-						this.$store.commit('setUserInfo', {
-							name: value
+						this.$store.commit('updateUserInfo', {
+							displayName: value
 						});
 					}
 				}
@@ -103,30 +106,26 @@ define(function(require, exports, module) {
 			<tbody>
 			<tr>
 				<td>
-					<table class="table table-condensed">
-						<tr v-for="dayWidget in onday">
-							<td>{{dayWidget.widget}} ({{dayWidget.title}})</td>
-							<td>
+					<dl class="dl dl-table">
+						<template v-for="dayWidget in onday">
+							<dt v-bind:title="dayWidget.title">{{dayWidget.widget}}</dt>
+							<dd class="m-b-sm">
 								<template v-if="dayWidget.set.length">
-								<table class="table table-hover">
-									<tr v-for="set in dayWidget.set">
-										<td>{{set}}</td>
-									</tr>
-								</table>
+								<div class="text-primary" v-for="set in dayWidget.set"><code>{{set}}</code></div>
 								</template>
 								<template v-else>
-									未修改任何配置
+								<div class="text-danger">Unmodified</div>
 								</template>
-							</td>
-						</tr>
-					</table>
+							</dd>
+						</template>
+					</dl>
 				</td>
 			</tr>
 		</tbody>
 	</table>
 </div>`,
 			data: function() {
-				let userTrackRecord = Storage.get('userInfo').track.record;
+				let userTrackRecord = this.$store.state.userInfo.track.record;
 				let trackData = util.sortByProp(userTrackRecord.reverse(), 'date');
 				return {
 					track: trackData
@@ -142,7 +141,7 @@ define(function(require, exports, module) {
 			template: `<div class="head" id="head">
 	<h1 class="head_T">前端组件管理系统</h1>
 	<div class="head_right form-inline">
-		<span class="form-control-static"><i class="ion">&#xe736;</i> {{info.name}}</span>
+		<span class="form-control-static"><i class="ion">&#xe736;</i> {{info.displayName}}</span>
 		<Dropdown class="btn btn-primary" 
 			:items="menuItems"
 			@onClick="menuClick"
@@ -173,6 +172,9 @@ define(function(require, exports, module) {
 					}, {
 						text: '立即更新',
 						win: 'checkupdate'
+					}, {
+						text: '退出',
+						win: 'logout'
 					}],
 					popwin: ''
 				};
@@ -196,14 +198,27 @@ define(function(require, exports, module) {
 					}, 0);
 				},
 				menuClick: function(item) {
-					if (item.win === 'checkupdate') {
-						this.$store.dispatch('update');
-					} else {
-						this.popwin = item.win;
+					let vm = this;
+					switch (item.win) {
+						case "logout":
+							wilddogApp.auth().signOut().then(function() {
+								box.hide();
+								vm.$router.push('/login');
+							}).catch(function(error) {
+								box.msg(error, {
+									color:'danger'
+								});
+							});
+							break;
+						case "checkupdate":
+							vm.$store.dispatch('update');
+							break;
+						default:
+							vm.popwin = item.win;
 					}
 				},
 				subInfo: function(info) {
-					this.$store.commit('setUserInfo', info);
+					this.$store.dispatch('setUserInfo', info);
 					this.popwin = '';
 				}
 			}
@@ -397,7 +412,7 @@ define(function(require, exports, module) {
                 <span class="btn btn-primary btn-sm chooseAll" :class="showtag.length ? '' : 'active'"
                 	@click="allClick">全部</span>
                 <span v-for="tag in tags" class="btn btn-primary btn-sm" 
-					:class="showtag.includes(tag) ? 'active' : ''"
+					:class="includes(tag) ? 'active' : ''"
                     @click="tagClick">{{tag}}</span> 
             </div>
             <div class="form-group" id="sortWrap">
@@ -423,6 +438,10 @@ define(function(require, exports, module) {
 				};
 			},
 			methods: {
+				includes: function(tag){
+					let vm = this;
+					return util.arrIncludes(vm.showtag, tag);
+				},
 				tagClick: function(event) {
 					let text = event.target.innerText;
 					let index = this.showtag.findIndex(function(value) {
@@ -447,28 +466,31 @@ define(function(require, exports, module) {
 					}
 					this.doFilter();
 				},
-				doFilter: function(to){
+				doFilter: function(to) {
 					let thePath = to ? to.path : null;
 					let theQuery = {};
-					if(this.showtag.length){
+					if (this.showtag.length) {
 						theQuery.tag = JSON.stringify(this.showtag);
 					}
-					
-					if(this.sortBy){
+
+					if (this.sortBy) {
 						theQuery.sort = this.sortBy;
 					}
-					
-					this.$router.push({ path: thePath, query: theQuery});
+
+					this.$router.push({
+						path: thePath,
+						query: theQuery
+					});
 
 					this.$store.commit('filterTag', this.showtag);
 					this.$store.commit('sort', this.sortBy);
 				}
 			},
-			created: function(){
-				if(this.$route.query.tag){
+			created: function() {
+				if (this.$route.query.tag) {
 					this.showtag = JSON.parse(this.$route.query.tag);
 				}
-				if(this.$route.query.sort){
+				if (this.$route.query.sort) {
 					this.sortBy = this.$route.query.sort;
 				}
 				this.doFilter();
@@ -648,9 +670,9 @@ seajs.use("${scriptName}")`;
 						inputText.setSelectionRange(0, inputText.value.length);
 						document.execCommand('copy');
 						currentFocus.focus();
-						console.log('复制成功');
+						box.msg('复制成功');
 					} else {
-						console.log('复制内容为空');
+						box.msg('复制内容为空');
 					}
 				},
 				pannelCopyHandle: function(command) {
@@ -685,15 +707,15 @@ seajs.use("${scriptName}")`;
 				close: function() {
 					let vm = this;
 					//保存使用数据
-					let _userInfo = util.storage.get('userInfo');
+					let _userInfo = vm.$store.state.userInfo;
 					vm.playWidgets.forEach(function(e, i) {
 						let thisone = Object.assign({}, e);
 						thisone.date = util.getDate();
 						thisone.set = vm.getConfigArray(e.userConfig);
 						_userInfo.track.record.push(thisone);
 					});
-					util.storage.set('userInfo', _userInfo);
-					this.$store.commit('setPlaying', []);
+					vm.$store.dispatch('setUserRecord', _userInfo);
+					vm.$store.commit('setPlaying', []);
 				},
 				wrapString: function(string, type, decorate) {
 					var _before = '',
@@ -869,18 +891,6 @@ seajs.use("${scriptName}")`;
 						this.widgets.splice(index, 1);
 				}
 			}
-		},
-		'loading': {
-			template: `<div v-if="show" class="globalMask">
-	<div class="bubblingG">
-		<span id="bubblingG_1"></span><span id="bubblingG_2"></span><span id="bubblingG_3"></span>
-	</div>
-</div>`,
-			computed: {
-				show: function() {
-					return this.$store.state.showLoading;
-				}
-			}
 		}
 
 	};
@@ -889,5 +899,13 @@ seajs.use("${scriptName}")`;
 		components
 	});
 
-	module.exports = components;
+	module.exports = {
+		template: `<div class="body flex-col">
+    <my-head></my-head>
+    <div class="flex-1 flex-col main">
+        <my-nav></my-nav>
+        <main-view></main-view>
+    </div>
+</div>`
+	};
 });

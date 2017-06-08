@@ -5,45 +5,73 @@ define(function(require, exports, module) {
 	"use strict";
 	const util = require('js/util');
 	const box = require('box');
+	const components = require('js/component/global');
 
-	const component = require('js/component/component');
-	
 	const router = require('js/router');
 	const store = require('js/store/store');
+	const wilddogApp = require('js/wilddog');
 
 	let app = new Vue({
 		el: '#app',
 		router,
 		store,
+		components,
+		methods: {
+			sendEmailVerified: function(cb) {
+				let user = wilddogApp.auth().currentUser;
+				if (user) {
+					user.sendEmailVerification()
+						.then(function() {
+							console.log('验证邮件发送成功');
+							if (typeof cb === 'function') {
+								cb(user);
+							}
+						});
+				}
+			}
+		},
 		created: function() {
 			let vm = this;
-			store.commit('callLoading', true);
-			let userInfo = util.storage.get('userInfo');
-			if (userInfo) {
-				store.commit('setUserInfo', userInfo);
-			} else {
-				util.storage.set('userInfo', store.state.userInfo);
-			}
-			axios.get(seajs.widgetRootPath + "/data.json").then(response => {
-				let res = response.data;
-				store.commit('setWidgets', res.widgets);
-				if (res.version) {
-					if (util.storage.get('version') && (util.storage.get('version').value !== res.version.value)) {
-						box.alert(res.version.description, function() {
-							store.dispatch('update');
-						}, {
-							title: "即将升级到" + res.version.value,
-							oktext: "立即升级",
-							bgclose: false,
-							btnclose: false
+			//登录状态检测
+			vm.$store.commit('callLoading', true);
+			wilddog.auth().onAuthStateChanged(function() {
+				let currentUser = wilddogApp.auth().currentUser;
+				vm.$store.commit('callLoading', false);
+				if (currentUser) {
+					vm.$store.commit('updateUserInfo', currentUser);
+					vm.$store.dispatch('update');
+					if (!currentUser.emailVerified) {
+						box.msg('邮箱未验证，请前往注册邮箱验证。没有到验证邮件？[<a href="javascript:;" class="btn btn-link resendvalidemail">点此重发</a>]', {
+							color: 'info',
+							onshow: function($box) {
+								$box.find('.resendvalidemail').on('click', function() {
+									vm.sendEmailVerified(function() {
+										box.msg('验证邮件发送成功', {
+											color: 'success'
+										});
+									});
+								});
+							}
 						});
-					} else {
-						store.commit('setVersion', res.version);
-						util.storage.set('version', res.version);
 					}
+					//同步云端数据
+					let ref = wilddogApp.sync().ref();
+					ref.child('/users/' + currentUser.uid).on('value', function(snapshot) {
+						let userInfo = snapshot.val();
+						if (userInfo.track.record && userInfo.track.record.split) {
+							userInfo.track.record = JSON.parse(userInfo.track.record);
+							vm.$store.commit('updateUserInfo', userInfo);
+						} else {
+							console.warn('用户数据异常', userInfo);
+						}
+
+					});
+				} else {
+					box.hide();
+					return vm.$router.replace('/login');
 				}
-				store.commit('callLoading', false);
 			});
+
 		}
 	});
 

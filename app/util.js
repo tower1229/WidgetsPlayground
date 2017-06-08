@@ -91,7 +91,21 @@ define(function(require, exports, module) {
 					return e;
 				}
 			});
+		},
+		arrIncludes: function(arr, ele){
+			if(Array.isArray(arr) && ele!==void 0){
+				if(Array.prototype.includes){
+					return arr.includes(ele);
+				}else{
+					let isIn;
+					arr.forEach(function(e,i){
+						if(e===ele){
+							isIn = true;
+						}
+					});
+					return isIn;
+				}
+			}
 		}
-
 	};
 });
