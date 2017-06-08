@@ -670,9 +670,13 @@ seajs.use("${scriptName}")`;
 						inputText.setSelectionRange(0, inputText.value.length);
 						document.execCommand('copy');
 						currentFocus.focus();
-						box.msg('复制成功');
+						box.msg('复制成功',{
+							delay: 2000
+						});
 					} else {
-						box.msg('复制内容为空');
+						box.msg('复制内容为空',{
+							delay: 2000
+						});
 					}
 				},
 				pannelCopyHandle: function(command) {
