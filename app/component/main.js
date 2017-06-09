@@ -28,7 +28,9 @@ define(function(require, exports, module) {
                 <p>© 2014 - 3014&emsp;Powered By [ <a href="https://github.com/tower1229/Flow-UI" target="_blank">Flow-UI</a>,
                 <a href="https://github.com/vuejs/vue" target="_blank">Vue</a>,
                 <a href="https://github.com/vuejs/vuex/" target="_blank">Vuex</a>,
-                <a href="https://github.com/vuejs/vue-router/" target="_blank">Vue-Router</a> ] </p>
+                <a href="https://github.com/vuejs/vue-router/" target="_blank">Vue-Router</a> ]
+                
+                <a href="http://refined-x.com/" target="_blank">前端路上</a> </p>
             </div>
         </div>
     </div>`
@@ -146,6 +148,7 @@ define(function(require, exports, module) {
 			:items="menuItems"
 			@onClick="menuClick"
 		>菜单</Dropdown>
+		<a href="https://github.com/tower1229/WidgetsPlayground" target="_blank" class="btn btn-success" id="issue"><i class="ion">&#xe6b5;</i>源码</a>
 		<a href="https://github.com/tower1229/WidgetsPlayground/issues" target="_blank" class="btn btn-success" id="issue"><i class="ion">&#xe637;</i>反馈</a>
 	</div>
 	<div class="search" v-bind:class="focusClass">
