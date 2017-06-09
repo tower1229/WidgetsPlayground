@@ -149,7 +149,7 @@ define(function(require, exports, module) {
 			@onClick="menuClick"
 		>菜单</Dropdown>
 		<a href="https://github.com/tower1229/WidgetsPlayground" target="_blank" class="btn btn-success" id="issue"><i class="ion">&#xe6b5;</i>源码</a>
-		<a href="https://github.com/tower1229/WidgetsPlayground/issues" target="_blank" class="btn btn-success" id="issue"><i class="ion">&#xe637;</i>反馈</a>
+		<a href="https://github.com/tower1229/WidgetsPlayground/issues" target="_blank" class="btn btn-warning" id="issue"><i class="ion">&#xe637;</i>反馈</a>
 	</div>
 	<div class="search" v-bind:class="focusClass">
 		<input id="globalSearch" class="form-control input-lg" type="text" placeholder="搜索：组件名称、编号、标签..." 
