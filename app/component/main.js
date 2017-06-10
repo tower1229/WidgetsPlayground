@@ -25,12 +25,14 @@ define(function(require, exports, module) {
         <play-time v-show="!this.$store.state.waitToChoose" v-if="this.$store.state.playingWidgets && this.$store.state.playingWidgets.length"></play-time>
         <div class="foot">
             <div>
-                <p>© 2014 - 3014&emsp;Powered By [ <a href="https://github.com/tower1229/Flow-UI" target="_blank">Flow-UI</a>,
+                <p>© 2014 - 3014&emsp;
+                Author 
+                <a href="http://refined-x.com/" target="_blank">前端路上</a>
+                &emsp;Powered By
+                [ <a href="https://github.com/tower1229/Flow-UI" target="_blank">Flow-UI</a>,
                 <a href="https://github.com/vuejs/vue" target="_blank">Vue</a>,
-                <a href="https://github.com/vuejs/vuex/" target="_blank">Vuex</a>,
-                <a href="https://github.com/vuejs/vue-router/" target="_blank">Vue-Router</a> ]
-                
-                <a href="http://refined-x.com/" target="_blank">前端路上</a> </p>
+                <a href="https://www.wilddog.com" target="_blank">wilddog</a> ]
+                </p>
             </div>
         </div>
     </div>`
