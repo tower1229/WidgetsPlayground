@@ -42,10 +42,10 @@ border-right: 1px solid #ccc;color:#aaa;width: 0;overflow: hidden;-webkit-transi
 .sub-nav .cur{background:#aaa;color:#fff;}
 .sub-nav li a:hover{background:#666;color:#fff;}
 .sub-nav.show{width: 120px;}
-.mainCont{padding: 60px 20px 20px;background:rgba(255,255,255,.7);}
+.mainCont{padding: 60px 20px 20px;background:rgba(255,255,255,.7);border-radius: 4px;}
 /*欢迎屏*/
 .welcome{padding-bottom: 20%;padding-top: 10%;}
-.welcome ._cont{padding: 20px; background: rgba(255,255,255,.7);width:400px;}
+.welcome ._cont{padding: 20px; background: rgba(255,255,255,.7);width:400px;border-radius: 4px;}
 .welcome ._T{ text-align: center; border-bottom: solid 1px #e5e5e5;
   padding-bottom: 15px;  margin: 0 0 20px;font-size: 30px;}
 .welcome ._p{  font-size: 20px; color: #777;line-height: 1.6;}
