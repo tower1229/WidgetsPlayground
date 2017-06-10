@@ -43,17 +43,6 @@ define(function(require, exports, module) {
                                 </div>
                             </form>
                         </div>
-                        <div class="card-foot">
-                            <div class="p">
-                                <div class="row">
-                                    <div class="span-4">
-                                        <div class="btn btn-info btn-block">
-                                            <i class="ion">&#xe603;</i> QQ
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
