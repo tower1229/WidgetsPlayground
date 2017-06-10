@@ -40,7 +40,7 @@ define(function(require, exports, module) {
 				if (currentUser) {
 					vm.$store.commit('updateUserInfo', currentUser);
 					vm.$store.dispatch('update');
-					if (!currentUser.emailVerified) {
+					if (currentUser.email && !currentUser.emailVerified) {
 						box.msg('邮箱未验证，请前往注册邮箱验证。没有到验证邮件？[<a href="javascript:;" class="btn btn-link resendvalidemail">点此重发</a>]', {
 							color: 'info',
 							onshow: function($box) {
