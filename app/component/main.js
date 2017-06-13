@@ -143,7 +143,7 @@ define(function(require, exports, module) {
 		},
 		'my-head': {
 			template: `<div class="head" id="head">
-	<h1 class="head_T">前端组件管理系统</h1>
+	<h1 class="head_T"><a href="http://refined-x.com" target="_blank">前端组件管理系统</a></h1>
 	<div class="head_right form-inline">
 		<span class="form-control-static"><i class="ion">&#xe736;</i> {{info.displayName}}</span>
 		<Dropdown class="btn btn-primary" 
