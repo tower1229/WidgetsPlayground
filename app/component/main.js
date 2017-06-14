@@ -216,6 +216,7 @@ define(function(require, exports, module) {
 							});
 							break;
 						case "checkupdate":
+							util.storage.clear();
 							vm.$store.dispatch('update');
 							break;
 						default:
