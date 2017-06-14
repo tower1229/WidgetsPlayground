@@ -611,7 +611,7 @@ seajs.use("${scriptName}")`;
 					vm.html = html.trim();
 				},
 				promiseGet: function(road) {
-					if (util.storage.get(road) !== void 0) {
+					if (util.storage.get(road) !== null) {
 						return new Promise(function(resolve, reject) {
 							resolve({
 								data: util.storage.get(road),
