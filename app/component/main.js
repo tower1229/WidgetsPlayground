@@ -211,7 +211,7 @@ define(function(require, exports, module) {
 								vm.$router.push('/login');
 							}).catch(function(error) {
 								box.msg(error, {
-									color:'danger'
+									color: 'danger'
 								});
 							});
 							break;
@@ -443,7 +443,7 @@ define(function(require, exports, module) {
 				};
 			},
 			methods: {
-				includes: function(tag){
+				includes: function(tag) {
 					let vm = this;
 					return util.arrIncludes(vm.showtag, tag);
 				},
@@ -552,7 +552,6 @@ define(function(require, exports, module) {
 						if (scriptNode) {
 							document.body.removeChild(scriptNode);
 						}
-						//diffCode
 						let diff = [];
 						vm.playWidgets.forEach(function(e, i) {
 							let configFinnal = JSON.parse(JSON.stringify(e.confBack)); //深拷贝
@@ -576,6 +575,7 @@ define(function(require, exports, module) {
 								id: e.id
 							}));
 							js += vm.wrapString(jsfragment, 'javascript', e.widget);
+							//diffCode
 							diff.push({
 								userConfig: e.userConfig,
 								widget: e.widget
@@ -610,19 +610,36 @@ seajs.use("${scriptName}")`;
 					}
 					vm.html = html.trim();
 				},
+				promiseGet: function(road) {
+					if (util.storage.get(road) !== void 0) {
+						return new Promise(function(resolve, reject) {
+							resolve({
+								data: util.storage.get(road),
+								config: {
+									url: road
+								}
+							});
+						});
+					} else {
+						return axios.get(road);
+					}
+				},
 				getTemp: function(widgetArray, cb) {
 					if (!Array.isArray(widgetArray)) {
 						return [];
 					}
 					let vm = this;
-					this.$store.commit('callLoading', true);
+					vm.$store.commit('callLoading', true);
 					Promise.all(widgetArray.map(function(widget) {
-						return axios.get(widget.conf);
+						return vm.promiseGet(widget.conf);	//axios.get(widget.conf);
 					})).then(function(posts) {
 						widgetArray.forEach(function(e, i) {
 							e.confBack = posts[i].data;
 							e.id = parseInt(Math.random() * 1e6);
 							e.userConfig = e.userConfig || {};
+							if(!util.storage.get(posts[i].config.url)){
+								util.storage.set(posts[i].config.url, e.confBack);
+							}
 							let configFinnal = JSON.parse(JSON.stringify(e.confBack)); //深拷贝
 							for (let x in configFinnal) {
 								if (e.userConfig[x]) {
@@ -635,27 +652,35 @@ seajs.use("${scriptName}")`;
 						});
 
 						return Promise.all(widgetArray.map(function(widget) {
-							return axios.get(widget.css);
+							return vm.promiseGet(widget.css);
 						}));
 					}).then(function(posts) {
 						posts.forEach(function(e, i) {
 							widgetArray[i].cssTemp = e.data;
+							if(!util.storage.get(posts[i].config.url)){
+								util.storage.set(posts[i].config.url, e.data);
+							}
 						});
-
 						return Promise.all(widgetArray.map(function(widget) {
-							return axios.get(widget.temp);
+							return vm.promiseGet(widget.temp);
 						}));
 					}).then(function(posts) {
 						posts.forEach(function(e, i) {
 							widgetArray[i].htmlTemp = e.data;
+							if(!util.storage.get(posts[i].config.url)){
+								util.storage.set(posts[i].config.url, e.data);
+							}
 						});
 
 						return Promise.all(widgetArray.map(function(widget) {
-							return axios.get(widget.script);
+							return vm.promiseGet(widget.script);
 						}));
 					}).then(function(posts) {
 						posts.forEach(function(e, i) {
 							widgetArray[i].jsTemp = e.data;
+							if(!util.storage.get(posts[i].config.url)){
+								util.storage.set(posts[i].config.url, e.data);
+							}
 						});
 						vm.$store.commit('callLoading', false);
 						if (typeof cb === 'function') {
@@ -675,11 +700,11 @@ seajs.use("${scriptName}")`;
 						inputText.setSelectionRange(0, inputText.value.length);
 						document.execCommand('copy');
 						currentFocus.focus();
-						box.msg('复制成功',{
+						box.msg('复制成功', {
 							delay: 2000
 						});
 					} else {
-						box.msg('复制内容为空',{
+						box.msg('复制内容为空', {
 							delay: 2000
 						});
 					}

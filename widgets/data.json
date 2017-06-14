@@ -1,7 +1,7 @@
 {
 	"version": {
-		"value": "1.1.0",
-		"description": "增加组件合并功能；补充部分组件。"
+		"value": "1.1.1",
+		"description": "组件模板将优先使用本地缓存，可以通过'菜单-立即更新'清除缓存。"
 	},
 	"widgets": [{
 		"title": "首页",

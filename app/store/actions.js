@@ -2,6 +2,7 @@ define(function(require, exports, module) {
 	"use strict";
 	const util = require('js/util');
 	const box = require('box');
+	const notice = require('notice');
 	const wilddogApp = require('js/wilddog');
 	
 	module.exports = {
@@ -46,13 +47,12 @@ define(function(require, exports, module) {
 			}).then(response => {
 				let res = response.data;
 				let localVersion = util.storage.get('version');
-				util.storage.clear();
 				if (localVersion && (localVersion.value !== res.version.value)) {
-					box.alert(res.version.description, null, {
-						title: "升级到" + res.version.value,
-						bgclose: false,
-						btnclose: false
-					});
+					util.storage.clear();
+					notice({
+	                    title: "升级到" + res.version.value,
+	                    desc: res.version.description
+	                });
 				}
 				context.commit('setVersion', res.version);
 				context.commit('setWidgets', res.widgets);

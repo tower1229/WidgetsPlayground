@@ -57,7 +57,7 @@ define(function(require, exports, module) {
 				if (this.support) {
 					var prefix = this.prefix;
 					for (var item in localStorage) {
-						if (item.indexOf(prefix) > -1 && item.indexOf('userInfo') < 0) {
+						if (item.indexOf(prefix) === 0) {
 							localStorage.removeItem(item);
 						}
 					}
