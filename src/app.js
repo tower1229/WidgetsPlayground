@@ -3,10 +3,6 @@
  */
 define(function(require, exports, module) {
 	"use strict";
-	const util = require('js/assets/util');
-	const box = require('box');
-	const components = require('js/component/global');
-
 	const router = require('js/router');
 	const store = require('js/store/store');
 	const wilddogApp = require('js/assets/wilddog');
@@ -15,7 +11,20 @@ define(function(require, exports, module) {
 		el: '#app',
 		router,
 		store,
-		components,
+		components: {
+			"loading": {
+				template: `<div v-if="show" class="globalMask">
+	<div class="bubblingG">
+		<span id="bubblingG_1"></span><span id="bubblingG_2"></span><span id="bubblingG_3"></span>
+	</div>
+</div>`,
+				computed: {
+					show: function() {
+						return this.$store.state.showLoading;
+					}
+				}
+			}
+		},
 		methods: {
 			sendEmailVerified: function(cb) {
 				let user = wilddogApp.auth().currentUser;

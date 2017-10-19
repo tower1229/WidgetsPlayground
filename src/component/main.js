@@ -1,8 +1,6 @@
 define(function(require, exports, module) {
 	"use strict";
 	const box = require('box');
-	const util = require('js/assets/util');
-	
 	const wilddogApp = require('js/assets/wilddog');
 
 	module.exports = {

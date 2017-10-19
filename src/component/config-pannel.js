@@ -120,9 +120,10 @@ define(function(require, exports, module) {
 				this.$emit('add', place);
 			},
 			delQueue: function(index) {
-				if (this.widgets.length > 1 && (this.widgets.length - index > 0))
+				if (this.widgets.length > 1 && (this.widgets.length - index > 0)) {
 					this.widgets.splice(index, 1);
+				}
 			}
 		}
-	}
+	};
 });
