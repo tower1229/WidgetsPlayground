@@ -1,6 +1,6 @@
 define(function(require, exports, module) {
 	"use strict";
-	const util = require('js/util');
+	const util = require('js/assets/util');
 
 	module.exports = {
 		navData: function(state) {

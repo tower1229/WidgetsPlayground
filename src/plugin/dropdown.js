@@ -43,20 +43,19 @@ define(function(require, exports, module) {
 								default: "hover"
 							}
 						},
-						data: function() {
-							let vm = this;
+						data() {
 							return {
 								visible: false,
-								timeout: null,
-								documentHandler: function(e) {
-									if (vm.$el.contains(e.target)) {
-										return false;
-									}
-									vm.handleClose();
-								}
+								timeout: null
 							};
 						},
 						methods: {
+							documentHandler(e) {
+								if (this.$el.contains(e.target)) {
+									return false;
+								}
+								this.handleClose();
+							},
 							handleClick() {
 								if (this.trigger === 'custom') return false;
 								if (this.trigger !== 'click') {

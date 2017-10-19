@@ -12,8 +12,8 @@
     <meta name="author" content="http://refined-x.com/">
     <link rel="icon" href="favicon.ico">
     <meta name="format-detection" content="telephone=no">
-    <link href="./css/ui.css" rel="stylesheet" />
-    <link href="./css/platform.css" rel="stylesheet" />
+    <link href="./static/css/ui.css" rel="stylesheet" />
+    <link href="./static/css/platform.css" rel="stylesheet" />
     <style id="playingCss"></style>
     <script>
         var _hmt = _hmt || [];
@@ -32,12 +32,12 @@
         <router-view></router-view>
         <loading></loading>
     </div>
-    <script src="./lib/sea.js" id="seajsnode"></script>
-    <script src="lib/vue.js"></script>
-    <script src="lib/vuex.js"></script>
-    <script src="lib/vue-router.js"></script>
-    <script src="lib/axios.min.js"></script>
-    <script src="lib/etpl.js"></script>
+    <script src="./src/lib/sea.js" id="seajsnode"></script>
+    <script src="./src/lib/vue.js"></script>
+    <script src="./src/lib/vuex.js"></script>
+    <script src="./src/lib/vue-router.js"></script>
+    <script src="./src/lib/axios.min.js"></script>
+    <script src="./src/lib/etpl.js"></script>
     <script src="https://cdn.wilddog.com/sdk/js/2.5.8/wilddog.js"></script>
     <script>
         seajs.root = '/WidgetsPlayground';
@@ -46,7 +46,7 @@
         seajs.config({
             base: "http://static-zt.oss-cn-qingdao.aliyuncs.com/modules",
             paths: {
-                "js": seajs.root + "/app"
+                "js": seajs.root + "/src"
             },
             alias: {
                 "audio": "audio/audio",
@@ -62,7 +62,7 @@
                 "video": "video/video"
             }
         });
-        seajs.use('js/index');
+        seajs.use('js/app');
 
     </script>
 </body>

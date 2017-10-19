@@ -1,6 +1,6 @@
 define(function(require, exports, module) {
 	"use strict";
-	const util = require('js/util');
+	const util = require('js/assets/util');
 	const getters = require('./getters');
 	const mutations = require('./mutations');
 	const actions = require('./actions');

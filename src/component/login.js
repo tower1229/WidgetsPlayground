@@ -1,7 +1,7 @@
 define(function(require, exports, module) {
     "use strict";
     const box = require('box');
-    const wilddogApp = require('js/wilddog');
+    const wilddogApp = require('js/assets/wilddog');
 
     module.exports = {
         template: `<div class="screenLayer">

@@ -1,9 +1,9 @@
 define(function(require, exports, module) {
 	"use strict";
-	const util = require('js/util');
+	const util = require('js/assets/util');
 	const box = require('box');
 	const notice = require('notice');
-	const wilddogApp = require('js/wilddog');
+	const wilddogApp = require('js/assets/wilddog');
 	
 	module.exports = {
 		setUserRecord: function(context, user) {

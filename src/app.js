@@ -3,13 +3,13 @@
  */
 define(function(require, exports, module) {
 	"use strict";
-	const util = require('js/util');
+	const util = require('js/assets/util');
 	const box = require('box');
 	const components = require('js/component/global');
 
 	const router = require('js/router');
 	const store = require('js/store/store');
-	const wilddogApp = require('js/wilddog');
+	const wilddogApp = require('js/assets/wilddog');
 
 	let app = new Vue({
 		el: '#app',
