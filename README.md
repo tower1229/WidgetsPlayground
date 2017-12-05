@@ -1,7 +1,10 @@
 # WidgetsPlayground
-前端组件管理系统，前端基于Vue2/Vue-router/Vuex实现，界面基于[Flow-UI](http://refined-x.com/Flow-UI/)实现，后端基于野狗云实现
 
 [![compatibility](https://img.shields.io/badge/compatibility-MicrosoftEdge%2B-orange.svg)]() [![GitHub release](https://img.shields.io/github/release/tower1229/WidgetsPlayground.svg)]() [![license](https://img.shields.io/github/license/tower1229/WidgetsPlayground.svg)]()
+
+## 介绍
+
+前端组件管理系统，前端基于Vue2/Vue-router/Vuex实现，界面基于[Flow-UI](http://refined-x.com/Flow-UI/)实现，后端基于野狗云实现
 
 ## 功能
 
