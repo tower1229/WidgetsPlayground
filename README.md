@@ -29,10 +29,11 @@
 - 接入野狗云后端，实现用户管理
 - 用户使用痕迹数据统计
 
-## 演示 
-http://refined-x.com/WidgetsPlayground/
-
-## 运行配置
-- 将项目置于服务器环境，修改`index.html`底部脚本中的`seajs.root`为``（以项目所在的服务器路径为准）
+## 配置
+- 项目直接丢进服务器环境就可以运行
+- 运行前，先修改`index.html`底部脚本中的`seajs.root`为``（以项目所在的服务路径为准）
 - `seajs.widgetRootPath`变量是演示组件库（`/widgets`）的位置，通常不需要修改
 - `seajs.config.base`是Flow-UI模块库的地址，通常不需要修改
+
+## 演示 
+http://refined-x.com/WidgetsPlayground/
